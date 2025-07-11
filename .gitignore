@@ -1,0 +1,112 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# PyCharm IDE Files
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/datasources.xml
+.idea/dataSources.ids
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/gradle.xml
+.idea/libraries/
+.idea/shelf/
+.idea/misc.xml
+.idea/modules.xml
+.idea/runConfigurations/
+
+# PyCharm Database Navigator
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+# Environment Variables (CRITICAL!)
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# Database
+*.db
+*.sqlite3
+database_backup/
+db_dumps/
+*.sql.backup
+
+# ML Models (Large files)
+models/berturk/
+models/downloaded/
+*.bin
+*.safetensors
+*.ckpt
+*.pth
+*.pkl
+*.model
+
+# Logs
+*.log
+logs/
+.log
+
+# Test Coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*~
+
+# PyCharm Generated
+.idea/inspectionProfiles/
+.idea/codeStyles/
+
+# Data Files (if sensitive)
+data/sensitive/
+data/real_customer_data/
