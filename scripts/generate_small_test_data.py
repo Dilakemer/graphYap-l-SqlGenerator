@@ -2,7 +2,7 @@ from faker import Faker
 import random
 
 # Turkish locale
-fake = Faker('tr_TR')
+fake = Faker("tr_TR")
 
 
 def generate_small_test_data():
@@ -46,7 +46,7 @@ def generate_small_test_data():
     sql_statements.append(employees_sql)
 
     # 3. SUPPLIERS (20 adet - küçük!)
-    company_suffixes = ['A.Ş.', 'Ltd.', 'Ltd. Şti.']
+    company_suffixes = ["A.Ş.", "Ltd.", "Ltd. Şti."]
     suppliers_sql = "INSERT INTO suppliers (company_name, contact_person, email, phone, city) VALUES\n"
     supplier_values = []
 
@@ -56,7 +56,9 @@ def generate_small_test_data():
         email = fake.email()
         phone = fake.phone_number()[:45]
         city = fake.city()
-        supplier_values.append(f"('{company[:295]}', '{person}', '{email[:145]}', '{phone}', '{city}')")
+        supplier_values.append(
+            f"('{company[:295]}', '{person}', '{email[:145]}', '{phone}', '{city}')"
+        )
 
     suppliers_sql += ",\n".join(supplier_values) + ";\n\n"
     sql_statements.append(suppliers_sql)
@@ -71,16 +73,27 @@ def generate_small_test_data():
         email = fake.email()
         phone = fake.phone_number()[:45]
         city = fake.city()
-        customer_values.append(f"('{company[:295]}', '{person}', '{email[:145]}', '{phone}', '{city}')")
+        customer_values.append(
+            f"('{company[:295]}', '{person}', '{email[:145]}', '{phone}', '{city}')"
+        )
 
     customers_sql += ",\n".join(customer_values) + ";\n\n"
     sql_statements.append(customers_sql)
 
     # 5. PRODUCTS (100 adet - küçük!)
-    product_names = ['iPhone', 'Samsung', 'Domates', 'Ekmek', 'Jean', 'Parfüm', 'Masa', 'Kitap']
+    product_names = [
+        "iPhone",
+        "Samsung",
+        "Domates",
+        "Ekmek",
+        "Jean",
+        "Parfüm",
+        "Masa",
+        "Kitap",
+    ]
     products_sql = "INSERT INTO products (product_name, category_id, supplier_id, unit_price, unit, stock_quantity) VALUES\n"
     product_values = []
-    units = ['adet', 'kg', 'litre']
+    units = ["adet", "kg", "litre"]
 
     for i in range(100):
         name = f"{random.choice(product_names)} {fake.word().title()}"
@@ -89,7 +102,9 @@ def generate_small_test_data():
         price = round(random.uniform(10.0, 1000.0), 2)
         unit = random.choice(units)
         stock = random.randint(10, 200)
-        product_values.append(f"('{name[:195]}', {category_id}, {supplier_id}, {price}, '{unit}', {stock})")
+        product_values.append(
+            f"('{name[:195]}', {category_id}, {supplier_id}, {price}, '{unit}', {stock})"
+        )
 
     products_sql += ",\n".join(product_values) + ";\n\n"
     sql_statements.append(products_sql)
@@ -97,15 +112,17 @@ def generate_small_test_data():
     # 6. ORDERS (150 adet - küçük!)
     orders_sql = "INSERT INTO orders (customer_id, employee_id, order_date, total_amount, status) VALUES\n"
     order_values = []
-    statuses = ['completed', 'pending', 'shipping']
+    statuses = ["completed", "pending", "shipping"]
 
     for i in range(150):
         customer_id = random.randint(1, 50)  # 1-50 customers
         employee_id = random.randint(1, 6)  # 1-6 employees
-        order_date = fake.date_between(start_date='-6m', end_date='today')
+        order_date = fake.date_between(start_date="-6m", end_date="today")
         total_amount = round(random.uniform(100.0, 5000.0), 2)
         status = random.choice(statuses)
-        order_values.append(f"({customer_id}, {employee_id}, '{order_date}', {total_amount}, '{status}')")
+        order_values.append(
+            f"({customer_id}, {employee_id}, '{order_date}', {total_amount}, '{status}')"
+        )
 
     orders_sql += ",\n".join(order_values) + ";\n\n"
     sql_statements.append(orders_sql)
@@ -120,7 +137,9 @@ def generate_small_test_data():
         quantity = random.randint(1, 10)
         unit_price = round(random.uniform(10.0, 500.0), 2)
         total_price = round(quantity * unit_price, 2)
-        detail_values.append(f"({order_id}, {product_id}, {quantity}, {unit_price}, {total_price})")
+        detail_values.append(
+            f"({order_id}, {product_id}, {quantity}, {unit_price}, {total_price})"
+        )
 
     order_details_sql += ",\n".join(detail_values) + ";\n\n"
     sql_statements.append(order_details_sql)
@@ -132,7 +151,7 @@ if __name__ == "__main__":
     print("Generating small test data...")
     sql_content = generate_small_test_data()
 
-    with open('data/small_test_data.sql', 'w', encoding='utf-8') as f:
+    with open("data/small_test_data.sql", "w", encoding="utf-8") as f:
         f.write("-- SMALL TEST DATA for NLP-SQL Project\n")
         f.write("-- Quick testing with manageable data size\n\n")
         f.write(sql_content)
