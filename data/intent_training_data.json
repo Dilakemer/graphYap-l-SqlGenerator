@@ -1,0 +1,2614 @@
+{
+  "meta": {
+    "total_samples": 650,
+    "intent_distribution": {
+      "SELECT": 242,
+      "SUM": 146,
+      "AVG": 122,
+      "COUNT": 140
+    },
+    "generation_method": "systematic_pattern_based"
+  },
+  "training_data": [
+    {
+      "text": "tedarikçi kayıtlarını göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteriların total çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "genel sipariş toplamını getir",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi ortalamasını hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "siparişların total bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteriların tümünü bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri count hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri bilgilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünleri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş adedini hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünların total hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçilerin sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünleri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm tedarikçileri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori kayıtlarını ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş ort söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri listesini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori average ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş sum söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan ortalamasını hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürünleri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş tutarını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş average ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanların total hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori ortalamasını çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri verilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori verilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri bilgilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün bilgilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm siparişleri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm ürünleri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi average bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanlerin sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişleri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün adedini hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün verilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanların total bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün sum hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ort çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi toplamını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş verilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi ortalamasını çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün miktarını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri verilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişların tümünü ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan verilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün kayıtlarını getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün ort hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "genel kategori toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "genel müşteri toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri listesini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ortalamasını hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "ortalama çalışan miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori ortalamasını ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürünların tümünü ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi kayıtlarını getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ort söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri toplamını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri toplam değeri",
+      "intent": "SUM"
+    },
+    {
+      "text": "siparişların total hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm müşterileri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "satış toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş toplamını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi verilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "genel ürün toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori ort ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi miktarını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi kayıtlarını ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi average çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürünlerin toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş listesini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri listesini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori tutarını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş bilgilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan count hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünların tümünü bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan listesini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi miktarını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş ortalamasını bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan sum çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategorileri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünlerin sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategoriların total hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteriların tümünü getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünlerin sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri tutarını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri kayıtlarını ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişleri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri count ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş toplamını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi listesini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün average bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri verilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori adedini söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategoriların tümünü bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçileri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sum çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş ort ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi tutarını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan tutarını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün bilgilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori kayıtlarını listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan adedini ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün adedini bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışanleri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi tutarını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteriların tümünü göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori adedini ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi bilgilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş listesini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm kategorileri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama sipariş miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün miktarını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş verilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün toplam değeri",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçiların tümünü bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi sum söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş toplamını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün kayıtlarını göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sum bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçiların tümünü ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri listesini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan toplamını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm çalışanleri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanleri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün bilgilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş ort hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan count söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri average çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteriların total hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm çalışanleri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün toplamını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçileri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ortalamasını çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanların tümünü getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama müşteri miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün average söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürünların tümünü göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategoriların total bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi average ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş average hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan bilgilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünlerin ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan adedini bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişlerin sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişların total söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "siparişların tümünü getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama ürün değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "genel sipariş ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "toplam tedarikçi sayısı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori kayıtlarını getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategorilerin sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün average çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi tutarını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi ortalamasını söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçiların total hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri bilgilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan verilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "genel tedarikçi ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategoriların total ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi bilgilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi sum bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri toplamını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi ort söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tüm kategorileri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "hangi müşteriler var",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş miktarını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan bilgilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "toplam gelir ne kadar",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan kayıtlarını getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteriların ortalama değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün listesini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanların ortalama değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "tüm tedarikçileri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş sum hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri average ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "ortalama kategori değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçiların total söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan average çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçiların total çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm ürünleri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi adedini bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi miktarını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünlerin sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünların tümünü listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünların total çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi adedini ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi sum çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş bilgilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişlerin sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri miktarını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşterileri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori bilgilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün ortalamasını bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan miktarını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori adedini hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategorilerin ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş kayıtlarını göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri tutarını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri miktarını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş ort çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori miktarını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri bilgilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ne kadar müşteri",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi ort çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri average bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori count bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri sum ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategoriların total söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "siparişlerin sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategorilerin toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri sum söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi bilgilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama ürün miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş sum çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori bilgilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçilerin ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri bilgilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün tutarını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri kayıtlarını göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategoriların ortalama değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürünların total ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori sum çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçiların tümünü listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün kayıtlarını bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün tutarını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "toplam sipariş sayısı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi listesini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün ortalamasını söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "toplam müşteri sayısı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan kayıtlarını bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanlerin sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori verilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm çalışanleri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanların total söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün kayıtlarını ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kaç ürün satıldı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan adedini hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori verilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteriların total bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan toplam değeri",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi toplamını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "ortalama müşteri değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan count bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri sum hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi kayıtlarını listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün verilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün miktarını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi adedini söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri tutarını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş miktarını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi verilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori bilgilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori sum hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm ürünleri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün listesini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama çalışan değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteriların total ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori miktarını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "genel kategori ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori ort hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan average hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori toplamını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan sum ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm kategorileri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori listesini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterileri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçilerin sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tüm tedarikçileri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan ort bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan tutarını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "toplam sipariş miktarı",
+      "intent": "SUM"
+    },
+    {
+      "text": "genel çalışan ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçiların total ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm müşterileri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sum ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan tutarını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm kategorileri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "toplam müşteri miktarı",
+      "intent": "SUM"
+    },
+    {
+      "text": "ne kadar ürün",
+      "intent": "COUNT"
+    },
+    {
+      "text": "genel tedarikçi toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "ne kadar tedarikçi",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ortalama sipariş miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategorileri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sum söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş sum ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori toplamını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori count ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş miktarını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş adedini bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünların total söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş kayıtlarını ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünların ortalama değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçilerin sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan miktarını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi toplam değeri",
+      "intent": "SUM"
+    },
+    {
+      "text": "ne kadar çalışan",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori tutarını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş verilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün count ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşterilerin sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışanleri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama kategori miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "toplam çalışan sayısı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi listesini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori average söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "tüm siparişleri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan toplamını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan verilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün tutarını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi ort bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori toplamını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçiların ortalama değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş average bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün verilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ort bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategoriların tümünü getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterilerin sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi listesini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş adedini ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün toplamını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçiların tümünü göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan ort ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi toplamını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "siparişların total çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori kayıtlarını bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün listesini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri count bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşterileri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan ort hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "tüm kategorileri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori average bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanleri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "toplam kategori miktarı",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri miktarını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün ortalamasını ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün ort ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri adedini hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteriların total söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri ort hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş count bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi listesini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategorileri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan ort çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş count ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi bilgilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş kayıtlarını getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategorileri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan ortalamasını çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi count söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan count ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi average söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan miktarını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışanleri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri average hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteriların tümünü ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori toplam değeri",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün ortalamasını çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün count bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş ortalamasını ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori adedini bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş bilgilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan listesini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün count hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori tutarını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş bilgilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünların total bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş sum bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçileri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kaç tedarikçi var",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kaç müşteri var",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün ort söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi average hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün ort çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanlerin sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan average bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi verilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama fiyat nedir",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanların tümünü ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori count hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışanların tümünü göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori toplamını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri toplamını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "kaç kategori var",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan ortalamasını söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri verilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi kayıtlarını bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan listesini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişların tümünü bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategorileri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan kayıtlarını listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterileri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi ortalamasını ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "toplam tedarikçi miktarı",
+      "intent": "SUM"
+    },
+    {
+      "text": "siparişleri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş bilgilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "genel müşteri ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori miktarını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi sum hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori sum ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori ortalamasını bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori kayıtlarını göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan ortalamasını ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş count söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ortalama sipariş değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri verilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş count hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori bilgilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm tedarikçileri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan kayıtlarını göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün listesini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi ort hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori count söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi miktarını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün ortalamasını hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan toplamını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan verilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanlerin toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "toplam kategori sayısı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi toplamını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün kayıtlarını listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün bilgilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm siparişleri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteriların tümünü listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş adedini söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi count bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçilerin toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri tutarını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori average çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri average söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori tutarını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş tutarını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "ortalama tedarikçi değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş listesini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ortalamasını bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş ortalamasını söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri miktarını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşterilerin sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri toplamını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm ürünleri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün average hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanlerin sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişların total ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan miktarını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kaç sipariş var",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi tutarını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategoriların tümünü ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri kayıtlarını bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan tutarını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş miktarını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş average çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi sum ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan bilgilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi bilgilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün verilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri kayıtlarını getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterilerin toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş kayıtlarını bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori average hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan tutarını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori listesini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi verilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanların total ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş kayıtlarını listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş listesini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişların tümünü göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanların total çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm ürünleri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori tutarını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm müşterileri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün toplamını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün ort bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş verilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "toplam ürün sayısı",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş average söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi ortalamasını bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategorilerin sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürün average ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategorilerin sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi count ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori miktarını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan listesini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan kayıtlarını ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün toplamını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün count söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori bilgilerini ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ortalamasını söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri sum çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "siparişlerin sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ne kadar sipariş",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori sum bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan ort söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori toplamını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş ort bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "toplam ürün miktarı",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş tutarını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "toplam çalışan miktarı",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi adedini hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişların ortalama değeri",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan verilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün verilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi verilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori verilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm müşterileri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri ortalamasını ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori verilerini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterilerin ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan sum bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan average ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan bilgilerini göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş ortalamasını hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "müşteri sum bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "müşteri adedini ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçiların tümünü getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri tutarını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "sipariş tutarını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "kaç çalışan var",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tüm siparişleri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ortalama tedarikçi miktarı",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün miktarını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışanlerin ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori listesini listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm tedarikçileri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategoriların tümünü listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kaç ürün var",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişleri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri count söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori sum söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan bilgilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçileri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün adedini ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori ort çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş tutarını bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün adedini söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "ürünların tümünü getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm çalışanleri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan sum söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategori ortalamasını hesapla",
+      "intent": "AVG"
+    },
+    {
+      "text": "siparişleri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "genel ürün ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş toplamını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışanların tümünü listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "sipariş sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "tedarikçi ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişlerin toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "çalışan average söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürünleri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürünleri ver",
+      "intent": "SELECT"
+    },
+    {
+      "text": "siparişlerin ortalaması",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışan adedini söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri adedini bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "kategori ort bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün tutarını çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürünlerin sayısını bul",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan ortalamasını bul",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori ort söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "kategori sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri adedini söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "müşteri ort ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "tedarikçi tutarını ver",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçi count hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş ortalamasını çıkar",
+      "intent": "AVG"
+    },
+    {
+      "text": "ürün bilgilerini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori ortalamasını söyle",
+      "intent": "AVG"
+    },
+    {
+      "text": "çalışanların tümünü bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategoriların total çıkar",
+      "intent": "SUM"
+    },
+    {
+      "text": "ürün tutarını söyle",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçilerin sayısını ver",
+      "intent": "COUNT"
+    },
+    {
+      "text": "çalışan toplamını hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "kategorilerin sayısını hesapla",
+      "intent": "COUNT"
+    },
+    {
+      "text": "sipariş verilerini getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterileri göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçiların total bul",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm siparişleri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategori listesini bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşterilerin sayısını söyle",
+      "intent": "COUNT"
+    },
+    {
+      "text": "genel çalışan toplamı",
+      "intent": "SUM"
+    },
+    {
+      "text": "tedarikçileri bul",
+      "intent": "SELECT"
+    },
+    {
+      "text": "müşteri kayıtlarını listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tedarikçi ort ver",
+      "intent": "AVG"
+    },
+    {
+      "text": "sipariş toplam değeri",
+      "intent": "SUM"
+    },
+    {
+      "text": "ne kadar kategori",
+      "intent": "COUNT"
+    },
+    {
+      "text": "siparişların tümünü listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "çalışan sum hesapla",
+      "intent": "SUM"
+    },
+    {
+      "text": "tüm müşterileri listele",
+      "intent": "SELECT"
+    },
+    {
+      "text": "tüm çalışanleri getir",
+      "intent": "SELECT"
+    },
+    {
+      "text": "kategoriların tümünü göster",
+      "intent": "SELECT"
+    },
+    {
+      "text": "ürün sayısını bul",
+      "intent": "COUNT"
+    }
+  ]
+}
