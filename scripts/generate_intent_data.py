@@ -1,7 +1,6 @@
 # scripts/generate_intent_data.py
 import json
 import random
-from itertools import product
 
 
 def generate_intent_training_data():

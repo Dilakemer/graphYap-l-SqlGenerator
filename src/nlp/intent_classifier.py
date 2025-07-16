@@ -119,7 +119,9 @@ class IntentClassifier:
         if not self.is_trained:
             # Try to load the saved model
             if not self.load_model():
-                raise RuntimeError("Model not trained. Call train() first or provide training data")
+                raise RuntimeError(
+                    "Model not trained. Call train() first or provide training data"
+                )
 
         if not text or not text.strip():
             raise ValueError("Text input cannot be empty")
@@ -146,7 +148,7 @@ class IntentClassifier:
                 "intent": intent_pred,
                 "confidence": float(max_confidence),
                 "all_confidences": confidence_by_class,
-                "text": text
+                "text": text,
             }
 
         except Exception as e:
@@ -170,12 +172,14 @@ class IntentClassifier:
                 result = self.predict(text)
                 results.append(result)
             except Exception as e:
-                results.append({
-                    "intent": "UNKNOWN",
-                    "confidence": 0.0,
-                    "error": str(e),
-                    "text": text
-                })
+                results.append(
+                    {
+                        "intent": "UNKNOWN",
+                        "confidence": 0.0,
+                        "error": str(e),
+                        "text": text,
+                    }
+                )
 
         return results
 
@@ -188,9 +192,9 @@ class IntentClassifier:
 
         try:
             model_data = {
-                'classifier': self.classifier,
-                'intent_labels':self.intent_labels,
-                'is_trained:': self.is_trained
+                "classifier": self.classifier,
+                "intent_labels": self.intent_labels,
+                "is_trained:": self.is_trained,
             }
 
             joblib.dump(model_data, self.model_path)
@@ -209,9 +213,9 @@ class IntentClassifier:
         try:
             model_data = joblib.load(self.model_path)
 
-            self.classifier = model_data['classifier']
-            self.intent_labels = model_data['intent_labels']
-            self.is_trained = model_data['is_trained']
+            self.classifier = model_data["classifier"]
+            self.intent_labels = model_data["intent_labels"]
+            self.is_trained = model_data["is_trained"]
 
             return True
 
@@ -228,10 +232,10 @@ class IntentClassifier:
             "is_trained": self.is_trained,
             "supported_intents": self.intent_labels,
             "model_path": self.model_path,
-            "berturk_loaded": self.berturk.is_loaded()
+            "berturk_loaded": self.berturk.is_loaded(),
         }
+
 
 def create_intent_classifier():
     """Convenience function to create intent classifier"""
     return IntentClassifier()
-
