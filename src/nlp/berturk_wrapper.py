@@ -6,7 +6,6 @@ Singleton pattern ile memory-efficient BERTurk model management.
 from transformers import AutoTokenizer, AutoModel
 import torch
 import numpy as np
-import time
 
 
 class BERTurkWrapper:
@@ -76,7 +75,7 @@ class BERTurkWrapper:
                 text,
                 # we want the output to be same as pytorch tensors not tensorflow tensors etc.
                 return_tensors="pt",
-                # Make the sentences equal length in order for the self-attention meachanism work correctly
+                # Make the sentences equal length in order for the self-attention mechanism work correctly
                 padding=True,
                 # If the lenght is more than 512, then truncate after the 512.
                 truncation=True,

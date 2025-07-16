@@ -44,7 +44,7 @@
 
 ---
 
-## WEEK 2 (20-26 Ocak 2025) - NLP Core Development
+## WEEK 2 (14 - 21.07.2025) - NLP Core Development
 **Ana Hedef:** Intent classification + Entity extraction  
 **Durum:** 🔄 Başlıyor
 
@@ -57,13 +57,5 @@
 
 ### **Beklenen çıktı:** 
 Working NLP pipeline: "müşteri sayısını hesapla" → Intent: COUNT, Entity: customers
-
----
-
-## Önümüzdeki Haftalar (Roadmap):
-**Week 3:** SQL Query Building + Template System  
-**Week 4:** Database Integration + End-to-end Testing  
-**Week 5:** Optimization + Error Handling  
-**Week 6:** Polish + Production Demo  
 
 ---
