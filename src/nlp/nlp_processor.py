@@ -217,14 +217,14 @@ class NLPProcessor:
     def get_processing_stats(self):
         """Get processing statistics"""
         success_rate = (
-            (self.successful_analyses / self.processed_queries * 100)
+            (self.successful_analyzes / self.processed_queries * 100)
             if self.processed_queries > 0
             else 0
         )
 
         return {
             "total_processed": self.processed_queries,
-            "successful_analyses": self.successful_analyses,
+            "successful_analyzes": self.successful_analyzes,
             "success_rate": round(success_rate, 2),
             "models_loaded": {
                 "intent_classifier": self.intent_classifier.is_trained,
