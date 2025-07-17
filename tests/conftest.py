@@ -102,4 +102,85 @@ def sample_entity_result():
     }
 
 @pytest.fixture
-def sample
+def sample_time_filter_result():
+    """Sample entity extraction result with time filter"""
+    return {
+        "text": "bu ayın sipariş listesi",
+        "tables": [
+            {
+                "table": "orders",
+                "confidence": 0.85,
+                "matched_pattern": "sipariş listesi"
+            }
+        ],
+        "time_filters": [
+            {
+                "period": "current_month",
+                "confidence": 0.88,
+                "matched_pattern": "bu ayın",
+                "sql_condition": "DATE_TRUNC('month', CURRENT_DATE)"
+            }
+        ],
+        "metadata": {
+            "total_entities": 2,
+            "has_time_filter": True,
+            "requires_join": False,
+            "complexity": "medium"
+        }
+    }
+
+@pytest.fixture
+def sample_nlp_analysis():
+    """Sample complete NLP analysis result"""
+    return {
+        "text": "müşteri sayısını hesapla",
+        "intent": {
+            "type": "COUNT",
+            "confidence": 0.85,
+            "all_confidences": {
+                "COUNT": 0.85,
+                "SELECT": 0.10,
+                "SUM": 0.03,
+                "AVG": 0.02
+            }
+        },
+        "entities": {
+            "tables": [
+                {
+                    "table": "customers",
+                    "confidence": 0.9,
+                    "matched_pattern": "müşteri sayısı"
+                }
+            ],
+            "time_filters": [],
+            "metadata": {
+                "total_entities": 1,
+                "has_time_filter": False,
+                "requires_join": False,
+                "complexity": "simple"
+            }
+        },
+        "analysis_metadata": {
+            "processing_status": "success",
+            "intent_confidence": 0.85,
+            "entity_complexity": "simple",
+            "requires_join": False,
+            "has_time_filter": False,
+            "sql_ready": True
+        }
+    }
+
+@pytest.fixture
+def empty_extraction_result():
+    """Empty extraction result for negative tests"""
+    return {
+        "text": "random meaningless text",
+        "tables": [],
+        "time_filters": [],
+        "metadata": {
+            "total_entities": 0,
+            "has_time_filter": False,
+            "requires_join": False,
+            "complexity": "no_entities"
+        }
+    }
