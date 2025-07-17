@@ -6,7 +6,7 @@ In order to understand the essentials about Logistic Regression:
     https://www.youtube.com/playlist?list=PLblh5JKOoLUKxzEP5HA2d-Li7IJkHfXSe
 """
 
-from .berturk_wrapper import BERTurkWrapper
+from berturk_wrapper import BERTurkWrapper
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
@@ -142,7 +142,7 @@ class IntentClassifier:
 
             # confidence scores is similar to -> [0.25, 0.8, 0.03, 0.02]
             for i, intent in enumerate(self.classifier.classes_):
-                confidence_by_class[intent] = float(confidence_scores(i))
+                confidence_by_class[intent] = float(confidence_scores[i])
 
             return {
                 "intent": intent_pred,
@@ -194,7 +194,7 @@ class IntentClassifier:
             model_data = {
                 "classifier": self.classifier,
                 "intent_labels": self.intent_labels,
-                "is_trained:": self.is_trained,
+                "is_trained": self.is_trained,
             }
 
             joblib.dump(model_data, self.model_path)

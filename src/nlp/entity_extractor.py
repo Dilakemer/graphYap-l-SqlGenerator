@@ -5,7 +5,7 @@ Detects tables and basic time filters only
 
 from jinja2 import pass_context
 
-from .berturk_wrapper import BERTurkWrapper
+from berturk_wrapper import BERTurkWrapper
 import numpy as np
 
 
@@ -163,6 +163,7 @@ class EntityExtractor:
                 detected_tables.append(table_entity)
 
         detected_tables.sort(key=lambda x: x["confidence"], reverse=True)
+        return detected_tables
 
     def _extract_time_filters(self, text_embedding):
         """
@@ -223,6 +224,7 @@ class EntityExtractor:
             "last_week": "DATE_TRUNC('week', CURRENT_DATE - INTERVAL)",
             "current_week": "DATE_TRUNC('week', CURRENT_DATE)",
         }
+        return conditions.get(time_period, "DATE_TRUNC('day', CURRENT_DATE)")
 
     def _assess_complexity(self, tables, time_filters):
         """
@@ -244,7 +246,7 @@ class EntityExtractor:
 
         return {
             "input_text": text,
-            "tables_detected": len(extraction["time_filters"]),
+            "tables_detected": len(extraction["tables"]),
             "time_filters_detected": len(extraction["time_filters"]),
             "complexity": extraction["metadata"]["complexity"],
             "top_table": (

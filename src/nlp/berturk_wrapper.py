@@ -168,3 +168,5 @@ class BERTurkWrapper:
 def get_berturk_instance():
     """Get BERTurk singleton instance"""
     return BERTurkWrapper()
+
+

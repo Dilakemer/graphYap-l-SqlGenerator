@@ -2,9 +2,9 @@
 Coordinates Intent Classification and Entity Extractor
 """
 
-from .intent_classifier import IntentClassifier
-from .entity_extractor import EntityExtractor
-from .berturk_wrapper import BERTurkWrapper
+from intent_classifier import IntentClassifier
+from entity_extractor import EntityExtractor
+from berturk_wrapper import BERTurkWrapper
 
 
 class NLPProcessor:
@@ -54,16 +54,16 @@ class NLPProcessor:
                     "all_confidences": intent_result["all_confidences"],
                 },
                 "entities": {
-                    "tables": entity_result["tables"],
-                    "time_filters": entity_result["time_filters"],
-                    "metadata": entity_result["metadata"],
+                    "tables": entity_result.get("tables", []),
+                    "time_filters": entity_result.get("time_filters", []),
+                    "metadata": entity_result.get("metadata", {}),
                 },
                 "analysis_metadata": {
                     "processing_status": "success",
                     "intent_confidence": intent_result["confidence"],
-                    "entity_complexity": entity_result["metadata"]["complexity"],
-                    "requires_join": entity_result["metadata"]["requires_join"],
-                    "has_time_filter": entity_result["metadata"]["has_time_filter"],
+                    "entity_complexity": entity_result.get("metadata", {}).get("complexity", "unknown"),
+                    "requires_join": entity_result.get("metadata", {}).get("requires_join", False),
+                    "has_time_filter": entity_result.get("metadata", {}).get("has_time_filter", False),
                     "sql_ready": self._is_sql_ready(intent_result, entity_result),
                 },
             }
@@ -124,24 +124,17 @@ class NLPProcessor:
     def _is_sql_ready(self, intent_result, entity_result):
         """
         Check if analysis is ready for SQL generation
-
-        Args:
-            intent_result: Intent Classification result
-            entity_result: Entity Extraction result
-        Returns:
-            Boolean indicating SQL readiness
         """
-
         if intent_result["confidence"] < 0.6:
             return False
 
         # Check if we have tables (required for SQL)
-        if not entity_result["tables"]:
+        tables = entity_result.get("tables", [])
+        if not tables:
             return False
 
         # Check if intent is supported
         supported_intents = ["SELECT", "COUNT", "SUM", "AVG"]
-
         if intent_result["intent"] not in supported_intents:
             return False
 
