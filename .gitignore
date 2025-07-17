@@ -110,3 +110,11 @@ Thumbs.db
 # Data Files (if sensitive)
 data/sensitive/
 data/real_customer_data/
+
+# Model files
+models/
+.hf_token
+
+# Cache
+.cache/
+__pycache__/
