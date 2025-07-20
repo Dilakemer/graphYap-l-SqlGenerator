@@ -1,7 +1,6 @@
 """
 BERTurk Wrapper with Local Cache Support
 """
-import os
 import sys
 import numpy as np
 import torch
