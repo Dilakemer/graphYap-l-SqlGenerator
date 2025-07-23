@@ -48,24 +48,33 @@ class NLPProcessor:
             extraction_result = self.entity_extractor.extract(text)
 
             # Format result to match expected interface
+            formatted_intent = self._format_intent_output(extraction_result)
+            formatted_entities = self._format_entities_output(extraction_result)
+            formatted_metadata = self._format_metadata_output(extraction_result)
+
+            # Başarılı işlenme kontrolü
+            processing_success = extraction_result["metadata"]["processing_status"] == "success"
+            sql_ready = processing_success and formatted_intent["type"] != "UNKNOWN"
+
+            # Metadata'yı güncelle
+            formatted_metadata["processing_status"] = "success" if processing_success else "error"
+            formatted_metadata["sql_ready"] = sql_ready
+
+            # Sonuç nesnesini oluştur
             analysis_result = {
                 "text": text,
-                "intent": self._format_intent_output(extraction_result),
-                "entities": self._format_entities_output(extraction_result),
-                "analysis_metadata": self._format_metadata_output(extraction_result)
+                "intent": formatted_intent,
+                "entities": formatted_entities,
+                "analysis_metadata": formatted_metadata
             }
 
-            # Track successful analysis
-            if extraction_result["metadata"]["processing_status"] == "success":
+            if processing_success:
                 self.successful_analyzes += 1
-                analysis_result["analysis_metadata"]["processing_status"] = "success"
-            else:
-                analysis_result["analysis_metadata"]["processing_status"] = "error"
 
             return analysis_result
 
         except Exception as e:
-            # Handle errors gracefully
+            # Hata durumunda dönecek minimum formatlı çıktı
             return {
                 "text": text,
                 "intent": {"type": "UNKNOWN", "confidence": 0.0},

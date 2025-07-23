@@ -27,8 +27,7 @@ def test_complete_pipeline():
 
     # Test queries
     queries = [
-        "Bu ayın müşteri sayısı",
-        "Geçen yıl sipariş toplamı"
+        "ürün kategorileriyle birlikte tedarikçi isimleri göster"
     ]
 
     for query in queries:

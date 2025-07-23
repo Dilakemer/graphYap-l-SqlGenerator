@@ -11,7 +11,8 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 # Import our trained NER model
-from ner_model.turkish_ner import TurkishNER
+from src.nlp.ner_model.turkish_ner import TurkishNER
+
 
 
 class EntityExtractor:

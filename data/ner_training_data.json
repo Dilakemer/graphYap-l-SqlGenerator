@@ -43281,6 +43281,2469 @@
           "text": "ortalama"
         }
       ]
-    }
+    },
+    {
+    "text": "müşterilerin sipariş tarihlerini ve toplam tutarlarını göster",
+    "entities": [
+      { "start": 0, "end": 11, "label": "TABLE_CUSTOMERS", "text": "müşterilerin" },
+      { "start": 12, "end": 28, "label": "TABLE_ORDERS", "text": "sipariş tarihlerini" },
+      { "start": 36, "end": 53, "label": "INTENT_SELECT", "text": "toplam tutarlarını" }
+    ]
+  },
+  {
+    "text": "her çalışanın verdiği siparişleri listele",
+    "entities": [
+      { "start": 4, "end": 12, "label": "TABLE_EMPLOYEES", "text": "çalışanın" },
+      { "start": 21, "end": 30, "label": "TABLE_ORDERS", "text": "siparişleri" },
+      { "start": 31, "end": 38, "label": "INTENT_SELECT", "text": "listele" }
+    ]
+  },
+  {
+    "text": "ürün ve kategori adlarını getir",
+    "entities": [
+      { "start": 0, "end": 4, "label": "TABLE_PRODUCTS", "text": "ürün" },
+      { "start": 8, "end": 16, "label": "TABLE_CATEGORIES", "text": "kategori" },
+      { "start": 17, "end": 24, "label": "INTENT_SELECT", "text": "adlarını getir" }
+    ]
+  },
+  {
+    "text": "2023 yılında sipariş veren firmaların isimlerini getir",
+    "entities": [
+      { "start": 0, "end": 4, "label": "TIME_RANGE_START", "text": "2023" },
+      { "start": 14, "end": 21, "label": "TABLE_ORDERS", "text": "sipariş" },
+      { "start": 29, "end": 37, "label": "TABLE_CUSTOMERS", "text": "firmaların" },
+      { "start": 38, "end": 48, "label": "INTENT_SELECT", "text": "isimlerini getir" }
+    ]
+  },
+  {
+    "text": "her siparişteki ürün adı ve tedarikçisini göster",
+    "entities": [
+      { "start": 4, "end": 15, "label": "TABLE_ORDER_DETAILS", "text": "siparişteki" },
+      { "start": 16, "end": 25, "label": "TABLE_PRODUCTS", "text": "ürün adı" },
+      { "start": 28, "end": 41, "label": "TABLE_SUPPLIERS", "text": "tedarikçisini" },
+      { "start": 42, "end": 48, "label": "INTENT_SELECT", "text": "göster" }
+    ]
+  },
+  {
+    "text": "her müşterinin sipariş sayısını ve çalışanı göster",
+    "entities": [
+      { "start": 4, "end": 14, "label": "TABLE_CUSTOMERS", "text": "müşterinin" },
+      { "start": 15, "end": 30, "label": "TABLE_ORDERS", "text": "sipariş sayısını" },
+      { "start": 35, "end": 43, "label": "TABLE_EMPLOYEES", "text": "çalışanı" },
+      { "start": 44, "end": 50, "label": "INTENT_SELECT", "text": "göster" }
+    ]
+  },
+  {
+    "text": "ürün ve sipariş miktarlarını listele",
+    "entities": [
+      { "start": 0, "end": 4, "label": "TABLE_PRODUCTS", "text": "ürün" },
+      { "start": 9, "end": 27, "label": "TABLE_ORDER_DETAILS", "text": "sipariş miktarlarını" },
+      { "start": 28, "end": 35, "label": "INTENT_SELECT", "text": "listele" }
+    ]
+  },
+  {
+    "text": "tedarikçilerin sağladığı ürünlerin adlarını göster",
+    "entities": [
+      { "start": 0, "end": 12, "label": "TABLE_SUPPLIERS", "text": "tedarikçilerin" },
+      { "start": 26, "end": 34, "label": "TABLE_PRODUCTS", "text": "ürünlerin" },
+      { "start": 35, "end": 50, "label": "INTENT_SELECT", "text": "adlarını göster" }
+    ]
+  },
+  {
+    "text": "ürün kategori bilgisi ile sipariş tutarlarını getir",
+    "entities": [
+      { "start": 0, "end": 18, "label": "TABLE_CATEGORIES", "text": "ürün kategori bilgisi" },
+      { "start": 24, "end": 43, "label": "TABLE_ORDER_DETAILS", "text": "sipariş tutarlarını" },
+      { "start": 44, "end": 49, "label": "INTENT_SELECT", "text": "getir" }
+    ]
+  },
+  {
+    "text": "müşteri ve sipariş numarasını getir",
+    "entities": [
+      { "start": 0, "end": 7, "label": "TABLE_CUSTOMERS", "text": "müşteri" },
+      { "start": 11, "end": 28, "label": "TABLE_ORDERS", "text": "sipariş numarasını" },
+      { "start": 29, "end": 34, "label": "INTENT_SELECT", "text": "getir" }
+    ]
+  },
+  {
+    "text": "ürün kategorilerini ve ürün adlarını göster",
+    "entities": [
+      {"start": 0, "end": 17, "label": "TABLE_CATEGORIES", "text": "ürün kategorilerini"},
+      {"start": 22, "end": 34, "label": "TABLE_PRODUCTS", "text": "ürün adlarını"},
+      {"start": 35, "end": 41, "label": "INTENT_SELECT", "text": "göster"}
+    ]
+  },
+  {
+    "text": "tedarikçi isimleri ve sattığı ürünleri listele",
+    "entities": [
+      {"start": 0, "end": 17, "label": "TABLE_SUPPLIERS", "text": "tedarikçi isimleri"},
+      {"start": 22, "end": 39, "label": "TABLE_PRODUCTS", "text": "sattığı ürünleri"},
+      {"start": 40, "end": 47, "label": "INTENT_SELECT", "text": "listele"}
+    ]
+  },
+  {
+    "text": "sipariş detaylarında yer alan ürünleri ve miktarlarını getir",
+    "entities": [
+      {"start": 0, "end": 21, "label": "TABLE_ORDER_DETAILS", "text": "sipariş detaylarında"},
+      {"start": 32, "end": 39, "label": "TABLE_PRODUCTS", "text": "ürünleri"},
+      {"start": 44, "end": 56, "label": "INTENT_SELECT", "text": "miktarlarını getir"}
+    ]
+  },
+  {
+    "text": "müşterilere ait sipariş tarihlerini listele",
+    "entities": [
+      {"start": 0, "end": 10, "label": "TABLE_CUSTOMERS", "text": "müşterilere"},
+      {"start": 15, "end": 32, "label": "TABLE_ORDERS", "text": "sipariş tarihlerini"},
+      {"start": 33, "end": 40, "label": "INTENT_SELECT", "text": "listele"}
+    ]
+  },
+  {
+    "text": "ürünlerin bağlı olduğu tedarikçi bilgilerini getir",
+    "entities": [
+      {"start": 0, "end": 8, "label": "TABLE_PRODUCTS", "text": "ürünlerin"},
+      {"start": 25, "end": 44, "label": "TABLE_SUPPLIERS", "text": "tedarikçi bilgilerini"},
+      {"start": 45, "end": 51, "label": "INTENT_SELECT", "text": "getir"}
+    ]
+  },
+  {
+    "text": "siparişlerde görevli çalışanları listele",
+    "entities": [
+      {"start": 0, "end": 11, "label": "TABLE_ORDERS", "text": "siparişlerde"},
+      {"start": 20, "end": 30, "label": "TABLE_EMPLOYEES", "text": "çalışanları"},
+      {"start": 31, "end": 38, "label": "INTENT_SELECT", "text": "listele"}
+    ]
+  },
+  {
+    "text": "sipariş numarası ve ürün adı bilgilerini getir",
+    "entities": [
+      {"start": 0, "end": 16, "label": "TABLE_ORDER_DETAILS", "text": "sipariş numarası"},
+      {"start": 21, "end": 31, "label": "TABLE_PRODUCTS", "text": "ürün adı"},
+      {"start": 32, "end": 43, "label": "INTENT_SELECT", "text": "bilgilerini getir"}
+    ]
+  },
+  {
+    "text": "ürün adı ve kategori adı bilgisi lazım",
+    "entities": [
+      {"start": 0, "end": 8, "label": "TABLE_PRODUCTS", "text": "ürün adı"},
+      {"start": 13, "end": 26, "label": "TABLE_CATEGORIES", "text": "kategori adı"},
+      {"start": 27, "end": 39, "label": "INTENT_SELECT", "text": "bilgisi lazım"}
+    ]
+  },
+  {
+    "text": "firma ve sipariş numaraları görüntülensin",
+    "entities": [
+      {"start": 0, "end": 5, "label": "TABLE_CUSTOMERS", "text": "firma"},
+      {"start": 9, "end": 28, "label": "TABLE_ORDERS", "text": "sipariş numaraları"},
+      {"start": 29, "end": 43, "label": "INTENT_SELECT", "text": "görüntülensin"}
+    ]
+  },
+  {
+    "text": "ürün kategorileriyle birlikte tedarikçi isimleri göster",
+    "entities": [
+      {"start": 0, "end": 20, "label": "TABLE_CATEGORIES", "text": "ürün kategorileriyle"},
+      {"start": 31, "end": 50, "label": "TABLE_SUPPLIERS", "text": "tedarikçi isimleri"},
+      {"start": 51, "end": 57, "label": "INTENT_SELECT", "text": "göster"}
+    ]
+  },
+  {
+    "text": "order details ve products detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 17,
+        "end": 25,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "order details ve products detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 17,
+        "end": 25,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "products ve suppliers detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 12,
+        "end": 21,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "order details üzerinden orders bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 24,
+        "end": 30,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "products ile ilişkili suppliers adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 22,
+        "end": 31,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 45,
+        "end": 50,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "order details ve products detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 17,
+        "end": 25,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "order details ile products eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 18,
+        "end": 26,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "order details ve bağlı products verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 23,
+        "end": 31,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "categories üzerinden suppliers bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_CATEGORIES",
+        "text": "categories"
+      },
+      {
+        "start": 21,
+        "end": 30,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "categories tablosuna göre suppliers bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_CATEGORIES",
+        "text": "categories"
+      },
+      {
+        "start": 26,
+        "end": 35,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "orders ile ilişkili customers adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 20,
+        "end": 29,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "customers ve bağlı orders verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 19,
+        "end": 25,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "customers ile orders eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 14,
+        "end": 20,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "order details ve bağlı orders verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 23,
+        "end": 29,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "order details ve bağlı products verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 23,
+        "end": 31,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "orders ve employees listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 10,
+        "end": 19,
+        "label": "TABLE_EMPLOYEES",
+        "text": "employees"
+      },
+      {
+        "start": 28,
+        "end": 33,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "customers ve orders detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 13,
+        "end": 19,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 34,
+        "end": 39,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "orders ile ilişkili employees adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 20,
+        "end": 29,
+        "label": "TABLE_EMPLOYEES",
+        "text": "employees"
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "orders ve customers listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 10,
+        "end": 19,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 28,
+        "end": 33,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "employees ile bağlantılı orders kayıtlarını getir",
+    "entities": [
+      {
+        "start": 25,
+        "end": 31,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": -1,
+        "end": 8,
+        "label": "TABLE_EMPLOYEES",
+        "text": "employees"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "categories üzerinden products bilgilerini getir",
+    "entities": [
+      {
+        "start": 21,
+        "end": 29,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": -1,
+        "end": 9,
+        "label": "TABLE_CATEGORIES",
+        "text": "categories"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "products ile ilişkili categories adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 22,
+        "end": 32,
+        "label": "TABLE_CATEGORIES",
+        "text": "categories"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "order details ve orders detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 17,
+        "end": 23,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "orders tablosuna göre employees bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 22,
+        "end": 31,
+        "label": "TABLE_EMPLOYEES",
+        "text": "employees"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "products ve bağlı suppliers verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 18,
+        "end": 27,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "products ve suppliers listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 12,
+        "end": 21,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 30,
+        "end": 35,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "Tüm order details ile ilişkili orders bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 17,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 31,
+        "end": 37,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 48,
+        "end": 53,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "orders ve customers detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 10,
+        "end": 19,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 34,
+        "end": 39,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "Tüm orders ile ilişkili customers bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 10,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 24,
+        "end": 33,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "products ve categories listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 12,
+        "end": 22,
+        "label": "TABLE_CATEGORIES",
+        "text": "categories"
+      },
+      {
+        "start": 31,
+        "end": 36,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "Tüm products ile ilişkili categories bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 12,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 26,
+        "end": 36,
+        "label": "TABLE_CATEGORIES",
+        "text": "categories"
+      },
+      {
+        "start": 47,
+        "end": 52,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "suppliers ile bağlantılı products kayıtlarını getir",
+    "entities": [
+      {
+        "start": 25,
+        "end": 33,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": -1,
+        "end": 8,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "products tablosuna göre suppliers bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 24,
+        "end": 33,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "orders tablosuna göre customers bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 22,
+        "end": 31,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "order details ile products eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 18,
+        "end": 26,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "order details tablosuna göre products bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 29,
+        "end": 37,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 48,
+        "end": 53,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "products tablosuna göre suppliers bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 24,
+        "end": 33,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "order details ile ilişkili products adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 27,
+        "end": 35,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 49,
+        "end": 54,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "order details ve products detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 17,
+        "end": 25,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "products ve suppliers listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 12,
+        "end": 21,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 30,
+        "end": 35,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "orders ve bağlı customers verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 16,
+        "end": 25,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "Tüm order details ile ilişkili products bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 17,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 31,
+        "end": 39,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 50,
+        "end": 55,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "products ve suppliers listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 12,
+        "end": 21,
+        "label": "TABLE_SUPPLIERS",
+        "text": "suppliers"
+      },
+      {
+        "start": 30,
+        "end": 35,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "orders tablosuna göre customers bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 22,
+        "end": 31,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "products üzerinden order details bilgilerini getir",
+    "entities": [
+      {
+        "start": 19,
+        "end": 32,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": -1,
+        "end": 7,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 45,
+        "end": 50,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "orders ile bağlantılı order details kayıtlarını getir",
+    "entities": [
+      {
+        "start": 22,
+        "end": 35,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": -1,
+        "end": 5,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 48,
+        "end": 53,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "orders ile customers eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 11,
+        "end": 20,
+        "label": "TABLE_CUSTOMERS",
+        "text": "customers"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "products ile bağlantılı order details kayıtlarını getir",
+    "entities": [
+      {
+        "start": 24,
+        "end": 37,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": -1,
+        "end": 7,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 50,
+        "end": 55,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "order details üzerinden products bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "order details"
+      },
+      {
+        "start": 24,
+        "end": 32,
+        "label": "TABLE_PRODUCTS",
+        "text": "products"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "Tüm orders ile ilişkili employees bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 10,
+        "label": "TABLE_ORDERS",
+        "text": "orders"
+      },
+      {
+        "start": 24,
+        "end": 33,
+        "label": "TABLE_EMPLOYEES",
+        "text": "employees"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "tedarikçi üzerinden kategori bilgilerini getir",
+    "entities": [
+      {
+        "start": 20,
+        "end": 28,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": -1,
+        "end": 8,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçi"
+      },
+      {
+        "start": 41,
+        "end": 46,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "müşteri tablosuna göre siparişler bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": 23,
+        "end": 33,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "sipariş ile bağlantılı müşteri kayıtlarını getir",
+    "entities": [
+      {
+        "start": 23,
+        "end": 30,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": -1,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş üzerinden sipariş detayları bilgilerini getir",
+    "entities": [
+      {
+        "start": 18,
+        "end": 35,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayları"
+      },
+      {
+        "start": -1,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 48,
+        "end": 53,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "ürün ve bağlı kategoriler verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 14,
+        "end": 25,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategoriler"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "ürünler ve bağlı tedarikçi verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 17,
+        "end": 26,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçi"
+      },
+      {
+        "start": 37,
+        "end": 42,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "müşteri ile bağlantılı sipariş kayıtlarını getir",
+    "entities": [
+      {
+        "start": 23,
+        "end": 30,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": -1,
+        "end": 6,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş detayı ile ürünler eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayı"
+      },
+      {
+        "start": 19,
+        "end": 26,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "ürün üzerinden sipariş detayı bilgilerini getir",
+    "entities": [
+      {
+        "start": 15,
+        "end": 29,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayı"
+      },
+      {
+        "start": -1,
+        "end": 3,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş detayları ile ürün eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayları"
+      },
+      {
+        "start": 22,
+        "end": 26,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "tedarikçiler üzerinden ürünler bilgilerini getir",
+    "entities": [
+      {
+        "start": 23,
+        "end": 30,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": -1,
+        "end": 11,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçiler"
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş detayı ile siparişler eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayı"
+      },
+      {
+        "start": 19,
+        "end": 29,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 45,
+        "end": 50,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "kategori ile tedarikçi eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": 13,
+        "end": 22,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçi"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "sipariş ile müşteriler eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 12,
+        "end": 22,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "sipariş ve bağlı çalışan verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 17,
+        "end": 24,
+        "label": "TABLE_EMPLOYEES",
+        "text": "çalışan"
+      },
+      {
+        "start": 35,
+        "end": 40,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "ürün tablosuna göre kategori bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 20,
+        "end": 28,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": 39,
+        "end": 44,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "sipariş ile müşteriler eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 12,
+        "end": 22,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "Tüm siparişler ile ilişkili çalışan bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 14,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 28,
+        "end": 35,
+        "label": "TABLE_EMPLOYEES",
+        "text": "çalışan"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "Tüm sipariş ile ilişkili çalışan bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 11,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 25,
+        "end": 32,
+        "label": "TABLE_EMPLOYEES",
+        "text": "çalışan"
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "müşteriler ve siparişler listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 14,
+        "end": 24,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 33,
+        "end": 38,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "siparişler üzerinden müşteri bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "siparişler üzerinden müşteri bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "sipariş üzerinden müşteriler bilgilerini getir",
+    "entities": [
+      {
+        "start": 18,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": -1,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 41,
+        "end": 46,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş ve çalışan listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 11,
+        "end": 18,
+        "label": "TABLE_EMPLOYEES",
+        "text": "çalışan"
+      },
+      {
+        "start": 27,
+        "end": 32,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "müşteriler üzerinden siparişler bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 21,
+        "end": 31,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 41,
+        "end": 46,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "ürün ile ilişkili kategori adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 18,
+        "end": 26,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": 40,
+        "end": 45,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "müşteriler ile bağlantılı siparişler kayıtlarını getir",
+    "entities": [
+      {
+        "start": 26,
+        "end": 36,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": -1,
+        "end": 9,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 49,
+        "end": 54,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "Tüm müşteri ile ilişkili siparişler bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 11,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": 25,
+        "end": 35,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "ürün tablosuna göre kategoriler bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 20,
+        "end": 31,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategoriler"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "sipariş üzerinden müşteriler bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 18,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "siparişler tablosuna göre müşteriler bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 26,
+        "end": 36,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 47,
+        "end": 52,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "ürün üzerinden tedarikçi bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 15,
+        "end": 24,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçi"
+      },
+      {
+        "start": 34,
+        "end": 39,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "ürünler üzerinden kategori bilgilerini al",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 18,
+        "end": 26,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": 36,
+        "end": 41,
+        "label": "INTENT_SELECT",
+        "text": "ni al"
+      }
+    ]
+  },
+  {
+    "text": "sipariş detayları ve ürünler listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayları"
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 37,
+        "end": 42,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "Tüm sipariş detayı ile ilişkili sipariş bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 18,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayı"
+      },
+      {
+        "start": 32,
+        "end": 39,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 50,
+        "end": 55,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "Tüm sipariş detayları ile ilişkili ürün bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 21,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayları"
+      },
+      {
+        "start": 35,
+        "end": 39,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 50,
+        "end": 55,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş detayı ile ürünler eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayı"
+      },
+      {
+        "start": 19,
+        "end": 26,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "ürünler ve bağlı tedarikçi verisini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 17,
+        "end": 26,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçi"
+      },
+      {
+        "start": 37,
+        "end": 42,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "müşteriler ve sipariş listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 14,
+        "end": 21,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 30,
+        "end": 35,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "siparişler üzerinden müşteri bilgilerini getir",
+    "entities": [
+      {
+        "start": 21,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": -1,
+        "end": 9,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 41,
+        "end": 46,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "siparişler ile ilişkili personel adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 24,
+        "end": 32,
+        "label": "TABLE_EMPLOYEES",
+        "text": "personel"
+      },
+      {
+        "start": 46,
+        "end": 51,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  },
+  {
+    "text": "tedarikçiler ile bağlantılı ürün kayıtlarını getir",
+    "entities": [
+      {
+        "start": 28,
+        "end": 32,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": -1,
+        "end": 11,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçiler"
+      },
+      {
+        "start": 45,
+        "end": 50,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "ürün ve kategori listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 8,
+        "end": 16,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": 25,
+        "end": 30,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "kategori ile tedarikçi eşleşmelerini göster",
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategori"
+      },
+      {
+        "start": 13,
+        "end": 22,
+        "label": "TABLE_SUPPLIERS",
+        "text": "tedarikçi"
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "label": "INTENT_SELECT",
+        "text": "öster"
+      }
+    ]
+  },
+  {
+    "text": "sipariş tablosuna göre müşteriler bilgilerini sun",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 23,
+        "end": 33,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": 44,
+        "end": 49,
+        "label": "INTENT_SELECT",
+        "text": "i sun"
+      }
+    ]
+  },
+  {
+    "text": "sipariş detayları ve ürünler listesini ver",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayları"
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürünler"
+      },
+      {
+        "start": 37,
+        "end": 42,
+        "label": "INTENT_SELECT",
+        "text": "i ver"
+      }
+    ]
+  },
+  {
+    "text": "Tüm sipariş detayı ile ilişkili siparişler bilgisini getir",
+    "entities": [
+      {
+        "start": 4,
+        "end": 18,
+        "label": "TABLE_ORDER_DETAILS",
+        "text": "sipariş detayı"
+      },
+      {
+        "start": 32,
+        "end": 42,
+        "label": "TABLE_ORDERS",
+        "text": "siparişler"
+      },
+      {
+        "start": 53,
+        "end": 58,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "ürün ve kategoriler detaylarını listele",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "label": "TABLE_PRODUCTS",
+        "text": "ürün"
+      },
+      {
+        "start": 8,
+        "end": 19,
+        "label": "TABLE_CATEGORIES",
+        "text": "kategoriler"
+      },
+      {
+        "start": 34,
+        "end": 39,
+        "label": "INTENT_SELECT",
+        "text": "stele"
+      }
+    ]
+  },
+  {
+    "text": "sipariş üzerinden müşteriler bilgilerini getir",
+    "entities": [
+      {
+        "start": 18,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteriler"
+      },
+      {
+        "start": -1,
+        "end": 6,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 41,
+        "end": 46,
+        "label": "INTENT_SELECT",
+        "text": "getir"
+      }
+    ]
+  },
+  {
+    "text": "sipariş ile ilişkili müşteri adlarını görüntüle",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "label": "TABLE_ORDERS",
+        "text": "sipariş"
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "label": "TABLE_CUSTOMERS",
+        "text": "müşteri"
+      },
+      {
+        "start": 42,
+        "end": 47,
+        "label": "INTENT_SELECT",
+        "text": "ntüle"
+      }
+    ]
+  }
   ]
 }

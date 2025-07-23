@@ -50,6 +50,27 @@ class QueryTemplates:
             base_query += f" WHERE {where_clause}"
 
         return base_query
+    
+    def join_template(self, 
+                  left_table, 
+                  right_table, 
+                  join_condition, 
+                  select_columns, 
+                  where_clause=None, 
+                  join_type="INNER", 
+                  limit=50):
+        """
+        Generate JOIN query between two tables.
+        """
+        columns_str = ", ".join(select_columns)
+        query = f"SELECT {columns_str} FROM {left_table} {join_type} JOIN {right_table} ON {join_condition}"
+        
+        if where_clause:
+            query += f" WHERE {where_clause}"
+        
+        query += f" ORDER BY 1 LIMIT {limit}"
+        return query
+
 
     def build_time_filter(self, date_column, time_period):
         """Build PostgreSQL time filter WHERE clause"""

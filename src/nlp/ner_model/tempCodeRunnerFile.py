@@ -48,7 +48,7 @@ class NERTrainer:
         self.config = {
             "learning_rate": 2e-5,
             "batch_size": 16,
-            "num_epochs": 8,
+            "num_epochs": 3,
             "warmup_ratio": 0.1,
             "weight_decay": 0.01,
             "max_grad_norm": 1.0,

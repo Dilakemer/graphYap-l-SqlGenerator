@@ -358,8 +358,11 @@ if __name__ == "__main__":
     # Test the data processor
     processor = NERDataProcessor()
 
-    # Process the generated NER data
-    ner_data_path = "../../../data/ner_training_data.json"  # Adjust path as needed
+    # base_dir: script dosyasının 4 seviye üstü, yani projenin kökü
+    base_dir = Path(__file__).parent.parent.parent.parent.resolve()
+
+    # Veri dosyasının tam yolu
+    ner_data_path = base_dir / "data" / "ner_training_data.json"
 
     try:
         processed_data = processor.process_ner_data(ner_data_path)
