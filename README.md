@@ -180,5 +180,5 @@ cd graphYap-l-SqlGenerator
 pip install -r requirements.txt
 python main.py
 
-##NOT:
+## 📝NOT:
 Model dosyasının boyutu çok büyük olduğu için eğitilmiş model dosyalarını models/ner_model/ altına eklemeyi unutmayın.
