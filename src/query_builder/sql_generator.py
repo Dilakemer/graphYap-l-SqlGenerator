@@ -4,6 +4,23 @@ from src.query_builder.schema_mapper import SchemaMapper
 from src.query_builder.query_templates import QueryTemplates
 from src.query_builder.query_validator import QueryValidator
 from src.query_builder.relation_mapper import RelationMapper
+
+#Bu yardımcı fonksiyon, NLP analizinden gelen varlıkları tarayarak "en fazla" (MAX) veya "en az" (MIN) gibi agregasyon modifikatörlerini tespit eder.
+def extract_aggregation_modifier(entities):
+    print(f"Debug: Processing entities - {entities}")  # Debug satırı
+    for ent in entities:
+        label = ent.get("label", "")
+        text = ent.get("text", "")
+        print(f"Debug: Checking entity - Label: {label}, Text: {text}")  # Debug satırı
+        
+        if "INTENT_MAX" in label or "en fazla" in text.lower():
+            print("Debug: Found MAX intent")  # Debug satırı
+            return "MAX"
+        elif "INTENT_MIN" in label or "en az" in text.lower():
+            print("Debug: Found MIN intent")  # Debug satırı
+            return "MIN"
+    return None
+
 class SQLGenerator:
     """
     Main SQL Generator that orchestrates query building
@@ -20,279 +37,273 @@ class SQLGenerator:
         self.queries_generated = 0
         self.successful_generations = 0
     
-    def build_sql_with_joins(self, start_table, end_table):
-        """
-        start_table'dan end_table'a olan JOIN adımlarını kullanarak SQL JOIN bloklarını oluşturur.
-        JOIN sırasını relation_mapper.find_join_path() ile bulur.
-        """
-
-        join_path = self.relation_mapper.find_join_path(start_table, end_table)
-
-        if not join_path:
-            print(f"❌ SQL Error: No join path found between {start_table} and {end_table}")
-            return None
-
-        alias_map = {}
-        alias_counter = 0
-        used_aliases = set()
-
-        # İlk tabloyu alias'la başlat
-        if start_table not in alias_map:
-            alias_map[start_table] = f"t{alias_counter}"
-            used_aliases.add(f"{start_table}::{alias_map[start_table]}")
-            alias_counter += 1
-
-        sql = f"FROM {start_table} {alias_map[start_table]}\n"
-
-        print("🔍 JOIN path bulundu:")
-        for step in join_path:
-            print("   ", step)
-
-        for src, src_col, tgt, tgt_col in join_path:
-            if not src or not tgt or not src_col or not tgt_col:
-                print(f"❌ Geçersiz JOIN adımı: {src}.{src_col} → {tgt}.{tgt_col}")
-                return None
-
-            # Alias oluştururken tablo+alias kombinasyonunu iki kez vermemeye dikkat et
-            if src not in alias_map:
-                alias_name = f"t{alias_counter}"
-                while f"{src}::{alias_name}" in used_aliases:
-                    alias_counter += 1
-                    alias_name = f"t{alias_counter}"
-                alias_map[src] = alias_name
-                used_aliases.add(f"{src}::{alias_name}")
-                alias_counter += 1
-
-            if tgt not in alias_map:
-                alias_name = f"t{alias_counter}"
-                while f"{tgt}::{alias_name}" in used_aliases:
-                    alias_counter += 1
-                    alias_name = f"t{alias_counter}"
-                alias_map[tgt] = alias_name
-                used_aliases.add(f"{tgt}::{alias_name}")
-                alias_counter += 1
-
-            src_alias = alias_map[src]
-            tgt_alias = alias_map[tgt]
-
-            sql += f"JOIN {tgt} {tgt_alias} ON {src_alias}.{src_col} = {tgt_alias}.{tgt_col}\n"
-
-        return sql
-
-
-
+    
     def generate_sql(self, nlp_analysis):
         self.queries_generated += 1
-
         try:
+            # 1. Girdi validasyonu
             if not self._validate_input(nlp_analysis):
-                return {
-                    "success": False,
-                    "error": "Invalid NLP analysis input",
-                    "sql": None,
-                    "debug_info": self._get_debug_info(nlp_analysis)
-                }
+                return {"success": False, "error": "Invalid NLP analysis input", "sql": None,
+                        "debug_info": self._get_debug_info(nlp_analysis)}
 
             if not nlp_analysis.get("analysis_metadata", {}).get("sql_ready", False):
-                return {
-                    "success": False,
-                    "error": "NLP analysis not ready for SQL generation",
-                    "sql": None,
-                    "debug_info": self._get_debug_info(nlp_analysis)
-                }
+                return {"success": False, "error": "NLP analysis not ready for SQL generation", "sql": None,
+                        "debug_info": self._get_debug_info(nlp_analysis)}
 
             intent = nlp_analysis["intent"]["type"]
-            tables = nlp_analysis["entities"]["tables"]
-            time_filters = nlp_analysis["entities"].get("time_filters", [])
+            entities = nlp_analysis["entities"]
+            tables = entities["tables"]
+            time_filters = entities.get("time_filters", [])
+            filters = entities.get("filters", [])
 
+            # 2. aggregation_modifier'ın raw intent/entity listesinden çıkarımı
+            if "aggregation_modifier" not in entities:
+                raw_ents = entities.get("entities", [])#min max içermeyen entity ler
+    
+                entities["aggregation_modifier"] = extract_aggregation_modifier(raw_ents)
+
+            # 3. Alias ve join path hazırlığı tablolara alias atama t0 ve t1 gibi
             main_table = tables[0]["table"]
-
             join_clauses = []
-            aliases = {main_table: "t0"}
-            alias_counter = 1
+            used_joins = set()
+            aliases = {}
+            alias_counter = 0
+            used_aliases = set()
 
-            # Her JOIN adımındaki tüm tablolar için alias ataması yapıyoruz
-            for table_entry in tables[1:]:
-                current_table = table_entry["table"]
-                if current_table not in aliases:
-                    aliases[current_table] = f"t{alias_counter}"
+            def assign_alias(table_name):
+                nonlocal alias_counter
+                if table_name not in aliases:
+                    alias = f"t{alias_counter}"
+                    while alias in used_aliases:
+                        alias_counter += 1
+                        alias = f"t{alias_counter}"
+                    aliases[table_name] = alias
+                    used_aliases.add(alias)
                     alias_counter += 1
+                return aliases[table_name]
 
-                join_path = self.relation_mapper.get_join_paths(main_table, current_table)
-                if not join_path:
-                    return {
-                        "success": False,
-                        "error": f"No join path found between {main_table} and {current_table}",
-                        "sql": None
-                    }
-
-                for from_table, from_col, to_table, to_col in join_path:
-                    # Ara tablolara alias ataması
-                    if from_table not in aliases:
-                        aliases[from_table] = f"t{alias_counter}"
-                        alias_counter += 1
-                    if to_table not in aliases:
-                        aliases[to_table] = f"t{alias_counter}"
-                        alias_counter += 1
-
-                    from_alias = aliases[from_table]
-                    to_alias   = aliases[to_table]
-
-                    join_clause = (
-                        f"JOIN {to_table} {to_alias} "
-                        f"ON {from_alias}.{from_col} = {to_alias}.{to_col}"
+            assign_alias(main_table)
+            for entry in tables[1:]:
+                assign_alias(entry["table"])
+                path = self.relation_mapper.get_join_paths(main_table, entry["table"])
+                if not path:
+                    return {"success": False,
+                            "error": f"No join path found between {main_table} and {entry['table']}",
+                            "sql": None}
+                for f_table, f_col, t_table, t_col in path:
+                    sig = (f_table, f_col, t_table, t_col)
+                    if sig in used_joins:
+                        continue
+                    used_joins.add(sig)
+                    fa, ta = assign_alias(f_table), assign_alias(t_table)
+                    join_clauses.append(
+                        f"JOIN {t_table} {ta} ON {fa}.{f_col} = {ta}.{t_col}"
                     )
-                    if join_clause not in join_clauses:
-                        join_clauses.append(join_clause)
 
-            print("💡 Join clauses constructed:")
-            for jc in join_clauses:
-                print(f"   {jc}")
+            where_clause = self.build_where_clause(filters, time_filters, aliases)
 
-            where_clause = None
-            if time_filters:
-                time_period = time_filters[0]["period"]
-                date_column = self.schema_mapper.get_table_schema(main_table).get("date_column")
-                where_clause = self.query_templates.build_time_filter(
-                    f"{aliases[main_table]}.{date_column}",
-                    time_period
-                )
-
+            # 4. Intent’e göre SQL oluşturma
             if intent == "SELECT":
                 sql = self._generate_select_multi_table(tables, aliases, join_clauses, where_clause)
+
             elif intent == "COUNT":
-                sql = self._generate_count_multi_table(tables, aliases, join_clauses, where_clause)
+                agg_mod = entities.get("aggregation_modifier")
+                if not agg_mod:
+                    lbl = nlp_analysis["intent"].get("label", "").lower()
+                    if "en fazla" in lbl or "en çok" in lbl:
+                        agg_mod = "MAX"
+                    elif "en az" in lbl or "en düşük" in lbl:
+                        agg_mod = "MIN"
+                order_by = "DESC" if agg_mod == "MAX" else "ASC" if agg_mod == "MIN" else None
+                limit = 1 if agg_mod in ("MAX", "MIN") else None
+                sql = self._generate_count_multi_table(
+                    tables, aliases, join_clauses, where_clause,
+                    order_by=order_by, limit=limit
+                )
+
             elif intent == "SUM":
-                sql = self._generate_sum_multi_table(tables, aliases, join_clauses, where_clause)
+                agg_mod = entities.get("aggregation_modifier")
+                if not agg_mod:
+                    lbl = nlp_analysis["intent"].get("label", "").lower()
+                    if "en fazla" in lbl or "en çok" in lbl:
+                        agg_mod = "MAX"
+                    elif "en az" in lbl or "en düşük" in lbl:
+                        agg_mod = "MIN"
+                order_by = "DESC" if agg_mod == "MAX" else "ASC" if agg_mod == "MIN" else None
+                limit = 1 if agg_mod in ("MAX", "MIN") else None
+                sql = self._generate_sum_multi_table(
+                    tables, aliases, join_clauses, where_clause,
+                    order_by=order_by, limit=limit
+                )
+
             elif intent == "AVG":
                 sql = self._generate_avg_multi_table(tables, aliases, join_clauses, where_clause)
 
-            else:
-                return {
-                    "success": False,
-                    "error": f"Unsupported intent: {intent}",
-                    "sql": None
-                }
+            elif intent == "AGGREGATE":
+                func = nlp_analysis["intent"].get("function", "").upper()
+                col = nlp_analysis["intent"].get("target_column")
+                alias = assign_alias(main_table)
+                if func in ("MIN", "MAX") and col:
+                    sql = f"SELECT {func}({alias}.{col}) FROM {main_table} {alias}"
+                    if where_clause:
+                        sql += f" WHERE {where_clause}"
+                else:
+                    return {"success": False, "error": "Aggregate function or target column missing", "sql": None}
 
-            is_valid, validation_error = self.validator.validate(sql)
-            if not is_valid:
-                return {
-                    "success": False,
-                    "error": f"Generated SQL failed validation: {validation_error}",
-                    "sql": sql
-                }
+            else:
+                return {"success": False, "error": f"Unsupported intent: {intent}", "sql": None}
+
+            # 5. Validator ile son kontrol
+            valid, err = self.validator.validate(sql)
+            if not valid:
+                return {"success": False, "error": f"Generated SQL failed validation: {err}", "sql": sql}
 
             self.successful_generations += 1
-
             return {
                 "success": True,
                 "sql": sql,
                 "intent": intent,
                 "tables": [t["table"] for t in tables],
-                "has_time_filter": len(time_filters) > 0,
-                "confidence": nlp_analysis["intent"]["confidence"],
+                "has_time_filter": bool(time_filters),
+                "confidence": nlp_analysis["intent"].get("confidence"),
                 "metadata": {
                     "query_type": intent.lower(),
                     "complexity": "medium" if len(tables) > 1 else "simple",
-                    "table_info": [self.schema_mapper.get_table_info(t["table"]) for t in tables]
+                    "table_info": [
+                        self.schema_mapper.get_table_info(t["table"])
+                        for t in tables
+                    ]
                 }
             }
 
         except Exception as e:
-            return {
-                "success": False,
-                "error": f"SQL generation failed: {str(e)}",
-                "sql": None,
-                "exception_type": type(e).__name__
-            }
-        
-    def _generate_count_multi_table(self, tables, aliases, join_clauses, where_clause):
-        """
-        Çoklu tabloya dayalı COUNT sorgusu üretir.
-        Örnek: 'önceki 3 yıl siparişleri kaç'
-        """
-        main_table = tables[0]["table"]
-        main_alias = aliases[main_table]
+            return {"success": False, "error": f"SQL generation failed: {e}", "sql": None,
+                    "exception_type": type(e).__name__}
 
-        # JOIN parçaları
-        join_part = " ".join(join_clauses) if join_clauses else ""
 
-        # WHERE filtresi
-        where_part = f" WHERE {where_clause}" if where_clause else ""
-
-        # COUNT(*) olarak döner
-        sql = (
-            f"SELECT COUNT(*) AS total_count "
-            f"FROM {main_table} {main_alias} "
-            f"{join_part}"
-            f"{where_part};"
-        )
-        return sql
-    
+            
     def _generate_avg_multi_table(self, tables, aliases, join_clauses, where_clause):
-        """
-        Çoklu tabloya dayalı AVG sorgusu üretir.
-        Örnek: 'bu yılın sipariş ortalaması'
-        """
-        main_table = tables[0]["table"]
-        main_alias = aliases[main_table]
+        # En uygun tabloyu bulmak için toplam miktar sütunu olan tabloyu ara
+        target_table = None
+        target_column = None
 
-        # Varsayılan olarak 'total_amount' gibi bir sütun varsayabiliriz, istersen bunu dinamik hale getirebiliriz
-        avg_column = "total_amount"
+        for table in tables:
+            table_name = table["table"]
+            schema = self.schema_mapper.get_table_schema(table_name)
+            if "total_amount" in schema.get("avg_columns", []):
+                target_table = table_name
+                target_column = "total_amount"
+                break
 
-        # JOIN parçaları
+        if not target_table:
+            # Varsayılan fallback: ilk tablo ve onun avg_columns'undan birini kullan
+            target_table = tables[0]["table"]
+            schema = self.schema_mapper.get_table_schema(target_table)
+            avg_cols = schema.get("avg_columns", [])
+            if avg_cols:
+                target_column = avg_cols[0]
+            else:
+                raise ValueError(f"No avg columns found in table {target_table}")
+
+        alias = aliases[target_table]
         join_part = " ".join(join_clauses) if join_clauses else ""
-
-        # WHERE filtresi
         where_part = f" WHERE {where_clause}" if where_clause else ""
 
         sql = (
-            f"SELECT AVG({main_alias}.{avg_column}) AS average_amount "
-            f"FROM {main_table} {main_alias} "
-            f"{join_part}"
-            f"{where_part};"
+            f"SELECT AVG({alias}.{target_column}) AS average_amount "
+            f"FROM {target_table} {alias} "
+            f"{join_part} "
+            f"{where_part}"
         )
         return sql
 
+
         
-    def _generate_sum_multi_table(self, tables, aliases, join_clauses, where_clause):
-        """
-        Çoklu tabloya dayalı SUM sorgusu üretir.
-        Örnek: 'Ürün kategori bilgisi ile sipariş tutarlarını getir'
-        """
-        # Burada hangi tablo/kolonda sum yapılacağını seç
-        # Örnek: son tabloda 'total_price' kolonu olduğunu varsayıyoruz
-        last_table = tables[-1]["table"]
-        schema = self.schema_mapper.get_table_schema(last_table)
-        sum_columns = schema.get("sum_columns", [])
-        if not sum_columns:
-            # Eğer schema'da tanımlı değilse hata
-            raise ValueError(f"No sum_columns defined for table {last_table}")
+    def _generate_avg_multi_table(self, tables, aliases, join_clauses, where_clause):
+        target_table = None
+        target_column = None
 
-        # Birden çok sum kolonu olabilir, biz ilkiyle ilerleyelim
-        sum_col = sum_columns[0]
-        main_table = tables[0]["table"]
-        main_alias = aliases[main_table]
-        last_alias = aliases[last_table]
+        for table in tables:
+            table_name = table["table"]
+            schema = self.schema_mapper.get_table_schema(table_name)
+            if "avg_columns" in schema and schema["avg_columns"]:
+                target_table = table_name
+                target_column = schema["avg_columns"][0]
+                break
 
-        # SELECT kısmı: grup sütunları + SUM
-        # Grup by için önceki tablonun ilk display column'unu alıyoruz örnek olarak
-        group_col = self.schema_mapper.get_table_schema(main_table).get("display_columns", ["*"])[0]
-        select_part = (
-            f"SELECT {main_alias}.{group_col} AS group_field, "
-            f"SUM({last_alias}.{sum_col}) AS sum_{sum_col}"
+        if not target_table:
+            # Fallback: ilk tablonun herhangi bir avg_column'u
+            target_table = tables[0]["table"]
+            schema = self.schema_mapper.get_table_schema(target_table)
+            avg_cols = schema.get("avg_columns", [])
+            if avg_cols:
+                target_column = avg_cols[0]
+            else:
+                raise ValueError(f"No avg columns found in table {target_table}")
+
+        alias = aliases[target_table]
+        join_part = " ".join(join_clauses) if join_clauses else ""
+        where_part = f" WHERE {where_clause}" if where_clause else ""
+
+        sql = (
+            f"SELECT AVG({alias}.{target_column}) AS average_amount "
+            f"FROM {target_table} {alias} "
+            f"{join_part} "
+            f"{where_part}"
         )
+        return sql
 
-        # Birleştirmeler
-        join_part = " ".join(join_clauses)
 
-        # GROUP BY
-        group_by = f"GROUP BY {main_alias}.{group_col}"
+    def _generate_sum_multi_table(self, tables, aliases, join_clauses, where_clause, order_by=None, limit=None):
+        target_table = None
+        target_column = None
 
-        # WHERE
-        where_part = f"WHERE {where_clause}" if where_clause else ""
+        for table in reversed(tables):  # Genelde son tablo sum sütunu içerebilir
+            table_name = table["table"]
+            schema = self.schema_mapper.get_table_schema(table_name)
+            if "sum_columns" in schema and schema["sum_columns"]:
+                target_table = table_name
+                target_column = schema["sum_columns"][0]
+                break
 
-        sql = f"{select_part} FROM {main_table} {main_alias} {join_part} {where_part} {group_by};"
+        if not target_table:
+            # Fallback
+            target_table = tables[-1]["table"]
+            schema = self.schema_mapper.get_table_schema(target_table)
+            sum_cols = schema.get("sum_columns", [])
+            if sum_cols:
+                target_column = sum_cols[0]
+            else:
+                raise ValueError(f"No sum columns found in table {target_table}")
+
+        main_table = tables[0]["table"]
+        ma = aliases[main_table]
+        la = aliases[target_table]
+        group_col = self.schema_mapper.get_table_schema(main_table).get("display_columns", ["*"])[0]
+
+        select = f"SELECT {ma}.{group_col} AS group_field, SUM({la}.{target_column}) AS sum_{target_column}"
+        join_p = " ".join(join_clauses)
+        where_p = f"WHERE {where_clause}" if where_clause else ""
+        group_by = f"GROUP BY {ma}.{group_col}"
+        order_p = f" ORDER BY sum_{target_column} {order_by}" if order_by else ""
+        limit_p = f" LIMIT {limit}" if limit else ""
+
+        sql = f"{select} FROM {main_table} {ma} {join_p} {where_p} {group_by}{order_p}{limit_p}"
+        return sql
+
+
+    def _generate_count_multi_table(self, tables, aliases, join_clauses, where_clause, order_by=None, limit=None):
+        main_table = tables[0]["table"]
+        ma = aliases[main_table]
+        join_p = " ".join(join_clauses)
+        where_p = f"WHERE {where_clause}" if where_clause else ""
+        group_col = self.schema_mapper.get_table_schema(main_table).get("display_columns", ["*"])[0]
+
+        sql = (f"SELECT {ma}.{group_col} AS group_field, COUNT(*) AS total_count "
+            f"FROM {main_table} {ma} {join_p} {where_p} "
+            f"GROUP BY {ma}.{group_col}")
+        if order_by: sql += f" ORDER BY total_count {order_by}"
+        if limit:    sql += f" LIMIT {limit}"
         return sql
 
 
@@ -444,7 +455,67 @@ class SQLGenerator:
             sql += f" WHERE {where_clause}"
 
         return sql
+    
+    def build_time_filter(self, date_column, time_filter_obj):
+        period = time_filter_obj.get("period")
+        specific_date = time_filter_obj.get("date")
 
+        filters = {
+            "current_month": f"EXTRACT(MONTH FROM {date_column}) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE)",
+            "current_year": f"EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE)",
+            "last_month": f"{date_column} >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month') AND {date_column} < DATE_TRUNC('month', CURRENT_DATE)",
+            "last_year": f"EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE) - 1",
+            "today": f"DATE({date_column}) = CURRENT_DATE",
+            "last_week": f"{date_column} >= DATE_TRUNC('week', CURRENT_DATE - INTERVAL '1 week') AND {date_column} < DATE_TRUNC('week', CURRENT_DATE)",
+            "current_week": f"EXTRACT(WEEK FROM {date_column}) = EXTRACT(WEEK FROM CURRENT_DATE) AND EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE)",
+        }
+
+        if period in filters:
+            return filters[period]
+
+        if period == "specific_date" and specific_date:
+            return f"DATE({date_column}) = '{specific_date}'"
+        
+        if period == "year":
+            start_date = time_filter_obj.get("start_date")
+            end_date = time_filter_obj.get("end_date")
+            if start_date and end_date:
+                return f"{date_column} BETWEEN '{start_date}' AND '{end_date}'"
+
+
+        return f"{date_column} >= CURRENT_DATE - INTERVAL '1 month'"
+
+    def build_where_clause(self, filters, time_filters, aliases):
+        where_clauses = []
+
+        if time_filters:
+            main_table = list(aliases.keys())[0]
+            date_column = self.schema_mapper.get_table_schema(main_table).get("date_column")
+            if date_column:
+                alias = aliases[main_table]
+                time_filter_clause = self.build_time_filter(f"{alias}.{date_column}", time_filters[0])
+                if time_filter_clause:
+                    where_clauses.append(time_filter_clause)
+
+        for f in filters:
+            col = f.get("column")
+            op = f.get("operator", "=")
+            val = f.get("value")
+
+            main_table = list(aliases.keys())[0]
+            alias = aliases[main_table]
+
+            if isinstance(val, str):
+                val_str = f"'{val}'"
+            else:
+                val_str = str(val)
+
+            where_clauses.append(f"{alias}.{col} {op} {val_str}")
+
+        if where_clauses:
+            return " AND ".join(where_clauses)
+        else:
+            return None
 
 
 def create_sql_generator():

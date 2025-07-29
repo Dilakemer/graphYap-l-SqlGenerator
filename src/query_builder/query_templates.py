@@ -1,11 +1,31 @@
 class QueryTemplates:
     """
-    SQL query templates for different intents
-    Generates PostgreSQL compatible queries
+    Farklı sorgu tipleri için şablonlar içerir
     """
 
     def __init__(self):
         pass
+    def min_template(self, table_name, min_columns, where_clause=None):
+        """Generate MIN query template"""
+        min_expressions = [f"MIN({col}) as min_{col}" for col in min_columns]
+        select_clause = ", ".join(min_expressions)
+
+        base_query = f"SELECT {select_clause} FROM {table_name}"
+        if where_clause:
+            base_query += f" WHERE {where_clause}"
+
+        return base_query
+    
+    def max_template(self, table_name, max_columns, where_clause=None):
+        """Generate MAX query template"""
+        max_expressions = [f"MAX({col}) as max_{col}" for col in max_columns]
+        select_clause = ", ".join(max_expressions)
+
+        base_query = f"SELECT {select_clause} FROM {table_name}"
+        if where_clause:
+            base_query += f" WHERE {where_clause}"
+
+        return base_query
 
     def select_template(self, table_name, columns, where_clause=None, limit=50):
         """Generate SELECT query template"""
@@ -72,17 +92,4 @@ class QueryTemplates:
         return query
 
 
-    def build_time_filter(self, date_column, time_period):
-        """Build PostgreSQL time filter WHERE clause"""
-        filters = {
-            "current_month": f"EXTRACT(MONTH FROM {date_column}) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE)",
-            "current_year": f"EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE)",
-            "last_month": f"{date_column} >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month') AND {date_column} < DATE_TRUNC('month', CURRENT_DATE)",
-            "last_year": f"EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE) - 1",
-            "today": f"DATE({date_column}) = CURRENT_DATE",
-            "last_week": f"{date_column} >= DATE_TRUNC('week', CURRENT_DATE - INTERVAL '1 week') AND {date_column} < DATE_TRUNC('week', CURRENT_DATE)",
-            "current_week": f"EXTRACT(WEEK FROM {date_column}) = EXTRACT(WEEK FROM CURRENT_DATE) AND EXTRACT(YEAR FROM {date_column}) = EXTRACT(YEAR FROM CURRENT_DATE)"
-        }
-
-        return filters.get(time_period, f"{date_column} >= CURRENT_DATE - INTERVAL '1 month'")
-
+    

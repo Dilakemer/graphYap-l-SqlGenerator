@@ -12,7 +12,9 @@ class SchemaMapper:
                 "primary_key": "id",
                 "date_column": "created_date",
                 "display_columns": ["company_name", "contact_person", "city"],
-                "countable_column": "id"
+                "countable_column": "id",
+                "sum_columns": [],
+                "avg_columns": []
             },
             "products": {
                 "primary_key": "id",
@@ -20,7 +22,8 @@ class SchemaMapper:
                 "display_columns": ["product_name", "unit_price", "stock_quantity", "unit"],
                 "countable_column": "id",
                 "sum_columns": ["unit_price", "stock_quantity"],
-                "avg_columns": ["unit_price", "stock_quantity"]
+                "avg_columns": ["unit_price", "stock_quantity"],
+                
             },
             "orders": {
                 "primary_key": "id",
@@ -28,19 +31,25 @@ class SchemaMapper:
                 "display_columns": ["id", "order_date", "total_amount", "status"],
                 "countable_column": "id",
                 "sum_columns": ["total_amount"],
-                "avg_columns": ["total_amount"]
+                "avg_columns": ["total_amount"],
+                "sum_columns": [],
+                "avg_columns": []
             },
             "categories": {
                 "primary_key": "id",
                 "date_column": "created_date",
                 "display_columns": ["category_name", "description"],
-                "countable_column": "id"
+                "countable_column": "id",
+                "sum_columns": [],
+                "avg_columns": []
             },
             "suppliers": {
                 "primary_key": "id",
                 "date_column": "created_date",
                 "display_columns": ["company_name", "contact_person", "city"],
-                "countable_column": "id"
+                "countable_column": "id",
+                "sum_columns": [],
+                "avg_columns": []                
             },
             "employees": {
                 "primary_key": "id",
@@ -95,3 +104,10 @@ class SchemaMapper:
             "supports_avg": bool(schema.get("avg_columns")),
             "display_column_count": len(schema.get("display_columns", []))
         }
+    
+    def get_minmax_columns(self, table_name):
+        """Get columns suitable for MIN and MAX operations"""
+        schema = self.get_table_schema(table_name)
+        if not schema:
+            return []
+        return list(set(schema.get("sum_columns", []) + schema.get("avg_columns", [])))

@@ -143,7 +143,7 @@ def save_training_data():
         "training_data": training_data,
     }
 
-    with open("data/intent_training_data.json", "w", encoding="utf-8") as f:
+    with open("../data/ner_training_data.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     print("✅ Optimized intent_training_data.json created!")

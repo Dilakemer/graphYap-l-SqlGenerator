@@ -18,6 +18,9 @@ find_join_path(): Başlangıç ve hedef tablo verildiğinde JOIN sırasını ç�
             ("order_details", "product_id"): ("products", "id"),
             ("purchase_orders", "supplier_id"): ("suppliers", "id"),
             ("purchase_orders", "employee_id"): ("employees", "id"),
+            ("orders", "supplier_id"): ("suppliers", "id"),
+
+
         }
 
     def get_related_table(self, source_table, source_column):

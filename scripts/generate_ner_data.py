@@ -1,545 +1,318 @@
-# scripts/generate_ner_data.py
-"""
-Turkish NER Training Data Generator for NLP-SQL Project
-Generates BIO-tagged entity data with comprehensive time support
-"""
-
-import json
 import random
+import json
+import hashlib
 from datetime import datetime, timedelta
-from itertools import product
-
-
+from tqdm import tqdm
+from src.query_builder.schema_mapper import SchemaMapper
 class NERDataGenerator:
-    """
-    Generates comprehensive NER training data for Turkish NLP-SQL system
-    Supports: Tables, Time filters (basic + advanced), Intents, Actions
-    """
+    def __init__(self, schema_mapper):
+        self.schema_mapper = schema_mapper
 
-    def __init__(self):
-        # Table entities
-        self.table_entities = {
-            "TABLE_CUSTOMERS": ["müşteri", "müşteriler", "client", "firma", "şirket"],
-            "TABLE_PRODUCTS": ["ürün", "ürünler", "product", "mal", "eşya", "stok"],
-            "TABLE_ORDERS": ["sipariş", "siparişler", "order", "satış", "satışlar"],
-            "TABLE_CATEGORIES": ["kategori", "kategoriler", "grup", "gruplar", "tür", "sınıf"],
-            "TABLE_SUPPLIERS": ["tedarikçi", "tedarikçiler", "supplier", "sağlayıcı"],
-            "TABLE_EMPLOYEES": ["çalışan", "çalışanlar", "personel", "employee", "memur"],
-            "TABLE_ORDER_DETAILS": ["sipariş detay", "sipariş detayı", "sipariş detayları", "order details"],
-            "TABLE_PURCHASE_ORDERS": ["satın alma", "alım", "satın alma siparişi", "alım siparişi"]
+        # Türkçe doğal ifadeler ve aliaslar
+        self.table_aliases = {
+            "customers": ["müşteri", "müşteriler", "firma", "şirket"],
+            "products": ["ürün", "ürünler", "mal"],
+            "orders": ["sipariş", "siparişler", "talep"],
+            "categories": ["kategori", "kategoriler", "sınıf"],
+            "suppliers": ["tedarikçi", "tedarikçiler", "sağlayıcı"],
+            "employees": ["çalışan", "personel", "işçi"],
+            "order_details": ["sipariş detay", "sipariş kalemi"],
+            "purchase_orders": ["satın alma siparişi", "alım siparişi"],
+            "employees": ["çalışan", "personel", "işçi", "maaş", "ücret", "gelir"],
         }
 
-        # Intent/Action entities
-        self.intent_entities = {
-            "INTENT_SELECT": ["göster", "listele", "getir", "bul", "ver", "çıkar", "göstersin"],
-            "INTENT_COUNT": ["sayı", "sayısı", "sayın", "adet", "adedi", "kaç", "tane", "miktar"],
-            "INTENT_SUM": ["toplam", "toplamı", "sum", "total", "tutar", "tutarı"],
-            "INTENT_AVG": ["ortalama", "ortalaması", "average", "avg", "mean"]
+        self.intents = {
+            "SELECT": ["göster", "listele", "getir", "ver"],
+            "COUNT": ["kaç", "adet", "say"],
+            "SUM": ["toplam", "tutar", "ne kadar", "toplam maaş", "maaş tutarı"],
+            "AVG": ["ortalama", "vasati", "ort", "ortalama maaş"],
+            "MAX": ["en yüksek", "maksimum", "en fazla"],
+            "MIN": ["en düşük", "minimum", "en az"]
         }
 
-        # Basic time entities
-        self.basic_time_entities = {
-            "TIME_CURRENT_MONTH": ["bu ay", "bu ayın", "bu ayki", "mevcut ay", "şimdiki ay"],
-            "TIME_CURRENT_YEAR": ["bu yıl", "bu yılın", "bu yıla ait", "mevcut yıl", "şimdiki yıl"],
-            "TIME_LAST_MONTH": ["geçen ay", "geçen ayın", "önceki ay", "önceki ayın"],
-            "TIME_LAST_YEAR": ["geçen yıl", "geçen yılın", "önceki yıl", "önceki yılın"],
-            "TIME_TODAY": ["bugün", "bugünkü", "bu gün", "bu günkü"],
-            "TIME_CURRENT_WEEK": ["bu hafta", "bu haftanın", "bu haftaki", "mevcut hafta"],
-            "TIME_LAST_WEEK": ["geçen hafta", "geçen haftanın", "önceki hafta", "önceki haftanın"]
+        self.conditions = {
+            "greater_than": ["büyük", "fazla", "üstünde", ">"],
+            "less_than": ["küçük", "az", "altında", "<"],
+            "equals": ["eşit", "olan", "="],
+            "not_equals": ["değil", "olmayan", "!="]
         }
 
-        # Advanced time entities - Relative periods
-        self.relative_time_entities = {
-            "TIME_LAST_N_DAYS": ["son {} gün", "geçen {} gün", "önceki {} gün"],
-            "TIME_LAST_N_WEEKS": ["son {} hafta", "geçen {} hafta", "önceki {} hafta"],
-            "TIME_LAST_N_MONTHS": ["son {} ay", "geçen {} ay", "önceki {} ay"],
-            "TIME_LAST_N_YEARS": ["son {} yıl", "geçen {} yıl", "önceki {} yıl"]
+        self.time_filters = {
+            "this_month": ["bu ay", "mevcut ay"],
+            "last_month": ["geçen ay", "önceki ay"],
+            "this_year": ["bu yıl", "mevcut yıl"],
+            "last_year": ["geçen yıl", "önceki yıl"],
+            "last_7_days": ["son 7 gün", "geçen hafta"],
+            "last_30_days": ["son 30 gün", "geçen ay"],
+            "today": ["bugün", "bu gün"]
         }
 
-        # Quarter entities
-        self.quarter_entities = {
-            "TIME_Q1": ["1. çeyrek", "birinci çeyrek", "ilk çeyrek", "Q1"],
-            "TIME_Q2": ["2. çeyrek", "ikinci çeyrek", "Q2"],
-            "TIME_Q3": ["3. çeyrek", "üçüncü çeyrek", "Q3"],
-            "TIME_Q4": ["4. çeyrek", "dördüncü çeyrek", "son çeyrek", "Q4"],
-            "TIME_CURRENT_QUARTER": ["bu çeyrek", "mevcut çeyrek", "şimdiki çeyrek"],
-            "TIME_LAST_QUARTER": ["geçen çeyrek", "önceki çeyrek"]
-        }
+        # Üretilmiş hash seti (benzersiz kayıt için)
+        self.generated_hashes = set()
 
-        # Specific date patterns
-        self.date_patterns = [
-            "dd.mm.yyyy",  # 21.07.2022
-            "dd/mm/yyyy",  # 21/07/2022
-            "yyyy-mm-dd",  # 2022-07-21
-            "dd mm yyyy",  # 21 07 2022
-            "mm/yyyy",  # 07/2022
-            "yyyy"  # 2022
+    def generate_dataset(self, size=10000):
+        samples = []
+        pattern_weights = [
+            ("simple_select", 0.2),
+            ("select_with_columns", 0.15),
+            ("time_filtered", 0.15),
+            ("aggregation", 0.15),
+            ("join_query", 0.15),
+            ("conditional", 0.1),
+            ("count_query", 0.1)
         ]
-
-        # Action verbs
-        self.action_verbs = ["göster", "listele", "getir", "bul", "hesapla", "çıkar", "ver"]
-
-        # Common numbers for relative dates
-        self.relative_numbers = [1, 2, 3, 5, 7, 10, 15, 20, 30, 45, 60, 90]
-
-    def generate_comprehensive_ner_data(self, total_samples=2000):
-        """Generate comprehensive NER training data"""
-        print("🚀 Generating comprehensive Turkish NER training data...")
-
-        training_data = []
-
-        # Generate basic patterns
-        training_data.extend(self._generate_basic_patterns(400))
-
-        # Generate relative time patterns
-        training_data.extend(self._generate_relative_time_patterns(400))
-
-        # Generate quarter patterns
-        training_data.extend(self._generate_quarter_patterns(200))
-
-        # Generate specific date patterns
-        training_data.extend(self._generate_specific_date_patterns(300))
-
-        # Generate complex multi-entity patterns
-        training_data.extend(self._generate_complex_patterns(400))
-
-        # Generate edge cases
-        training_data.extend(self._generate_edge_cases(300))
-
-        # Remove duplicates and shuffle
-        unique_data = self._remove_duplicates(training_data)
-        random.shuffle(unique_data)
-
-        return unique_data[:total_samples]
-
-    def _generate_basic_patterns(self, count):
-        """Generate basic table + intent + basic time patterns"""
-        patterns = []
-
-        for _ in range(count):
-            # Random selections
-            table_entity, table_words = random.choice(list(self.table_entities.items()))
-            table_word = random.choice(table_words)
-
-            intent_entity, intent_words = random.choice(list(self.intent_entities.items()))
-            intent_word = random.choice(intent_words)
-
-            action_verb = random.choice(self.action_verbs)
-
-            # Sometimes add time
-            if random.random() < 0.6:  # 60% chance
-                time_entity, time_words = random.choice(list(self.basic_time_entities.items()))
-                time_word = random.choice(time_words)
-
-                # Different sentence structures
-                templates = [
-                    f"{time_word} {table_word} {intent_word}",
-                    f"{table_word} {intent_word} {time_word}",
-                    f"{time_word} {table_word} {intent_word} {action_verb}",
-                    f"{table_word} {intent_word} {time_word} {action_verb}"
-                ]
-
-                text = random.choice(templates)
-                entities = self._extract_entities_from_text(text, {
-                    table_word: table_entity,
-                    intent_word: intent_entity,
-                    time_word: time_entity,
-                    action_verb: "ACTION_VERB"
-                })
-            else:
-                # No time entity
-                templates = [
-                    f"{table_word} {intent_word}",
-                    f"{table_word} {intent_word} {action_verb}",
-                    f"{table_word} {action_verb}"
-                ]
-
-                text = random.choice(templates)
-                entities = self._extract_entities_from_text(text, {
-                    table_word: table_entity,
-                    intent_word: intent_entity,
-                    action_verb: "ACTION_VERB"
-                })
-
-            patterns.append({
-                "text": text,
-                "entities": entities
-            })
-
-        return patterns
-
-    def _generate_relative_time_patterns(self, count):
-        """Generate relative time patterns: son 3 ay, son 10 gün etc."""
-        patterns = []
-
-        for _ in range(count):
-            # Random selections
-            table_entity, table_words = random.choice(list(self.table_entities.items()))
-            table_word = random.choice(table_words)
-
-            intent_entity, intent_words = random.choice(list(self.intent_entities.items()))
-            intent_word = random.choice(intent_words)
-
-            # Generate relative time
-            time_type = random.choice(list(self.relative_time_entities.keys()))
-            time_template = random.choice(self.relative_time_entities[time_type])
-            number = random.choice(self.relative_numbers)
-            relative_time = time_template.format(number)
-
-            # Different sentence structures
-            templates = [
-                f"{relative_time} {table_word} {intent_word}",
-                f"{table_word} {intent_word} {relative_time}",
-                f"{relative_time} {table_word} {intent_word} göster",
-                f"{relative_time}daki {table_word} {intent_word}"
-            ]
-
-            text = random.choice(templates)
-            entities = self._extract_entities_from_text(text, {
-                str(number): "TIME_NUMBER",
-                relative_time.split()[-1]: "TIME_UNIT",  # gün, hafta, ay, yıl
-                table_word: table_entity,
-                intent_word: intent_entity
-            })
-
-            patterns.append({
-                "text": text,
-                "entities": entities
-            })
-
-        return patterns
-
-    def _generate_quarter_patterns(self, count):
-        """Generate quarter-based patterns"""
-        patterns = []
-        years = [2020, 2021, 2022, 2023, 2024]
-
-        for _ in range(count):
-            table_entity, table_words = random.choice(list(self.table_entities.items()))
-            table_word = random.choice(table_words)
-
-            intent_entity, intent_words = random.choice(list(self.intent_entities.items()))
-            intent_word = random.choice(intent_words)
-
-            # Quarter patterns
-            if random.random() < 0.5:
-                # Basic quarter
-                quarter_entity, quarter_words = random.choice(list(self.quarter_entities.items()))
-                quarter_word = random.choice(quarter_words)
-
-                templates = [
-                    f"{quarter_word} {table_word} {intent_word}",
-                    f"{table_word} {intent_word} {quarter_word}",
-                    f"{quarter_word}deki {table_word} {intent_word}"
-                ]
-            else:
-                # Year + quarter
-                year = random.choice(years)
-                quarter_entity, quarter_words = random.choice(list(self.quarter_entities.items()))
-                quarter_word = random.choice(quarter_words)
-
-                templates = [
-                    f"{year} {quarter_word} {table_word} {intent_word}",
-                    f"{year} yılın {quarter_word} {table_word} {intent_word}",
-                    f"{quarter_word} {year} {table_word} {intent_word}"
-                ]
-
-            text = random.choice(templates)
-            entities = self._extract_entities_from_text(text, {
-                table_word: table_entity,
-                intent_word: intent_entity,
-                quarter_word: quarter_entity
-            })
-
-            patterns.append({
-                "text": text,
-                "entities": entities
-            })
-
-        return patterns
-
-    def _generate_specific_date_patterns(self, count):
-        """Generate specific date patterns: 21.07.2022, 2022-07-21 etc."""
-        patterns = []
-
-        for _ in range(count):
-            table_entity, table_words = random.choice(list(self.table_entities.items()))
-            table_word = random.choice(table_words)
-
-            intent_entity, intent_words = random.choice(list(self.intent_entities.items()))
-            intent_word = random.choice(intent_words)
-
-            # Generate random date
-            year = random.randint(2020, 2024)
-            month = random.randint(1, 12)
-            day = random.randint(1, 28)  # Safe day range
-
-            # Different date formats
-            date_formats = [
-                f"{day:02d}.{month:02d}.{year}",  # 21.07.2022
-                f"{day:02d}/{month:02d}/{year}",  # 21/07/2022
-                f"{year}-{month:02d}-{day:02d}",  # 2022-07-21
-                f"{day} {month} {year}",  # 21 7 2022
-                f"{month:02d}/{year}",  # 07/2022
-                str(year)  # 2022
-            ]
-
-            date_str = random.choice(date_formats)
-
-            # Templates
-            templates = [
-                f"{date_str} {table_word} {intent_word}",
-                f"{table_word} {intent_word} {date_str}",
-                f"{date_str} tarihli {table_word} {intent_word}",
-                f"{date_str} tarihi {table_word} {intent_word}",
-                f"{table_word} {intent_word} {date_str} tarih"
-            ]
-
-            text = random.choice(templates)
-            entities = self._extract_entities_from_text(text, {
-                date_str: "TIME_SPECIFIC_DATE",
-                table_word: table_entity,
-                intent_word: intent_entity
-            })
-
-            patterns.append({
-                "text": text,
-                "entities": entities
-            })
-
-        return patterns
-
-    def _generate_complex_patterns(self, count):
-        """Generate complex multi-entity patterns"""
-        patterns = []
-
-        for _ in range(count):
-            # Multiple tables
-            if random.random() < 0.3:
-                table1_entity, table1_words = random.choice(list(self.table_entities.items()))
-                table1_word = random.choice(table1_words)
-
-                table2_entity, table2_words = random.choice(list(self.table_entities.items()))
-                table2_word = random.choice(table2_words)
-
-                intent_entity, intent_words = random.choice(list(self.intent_entities.items()))
-                intent_word = random.choice(intent_words)
-
-                templates = [
-                    f"{table1_word} ve {table2_word} {intent_word}",
-                    f"{table1_word} {table2_word} {intent_word}",
-                    f"{table1_word} ile {table2_word} {intent_word}"
-                ]
-
-                text = random.choice(templates)
-                entities = self._extract_entities_from_text(text, {
-                    table1_word: table1_entity,
-                    table2_word: table2_entity,
-                    intent_word: intent_entity
-                })
-
-            # Time range patterns
-            else:
-                table_entity, table_words = random.choice(list(self.table_entities.items()))
-                table_word = random.choice(table_words)
-
-                intent_entity, intent_words = random.choice(list(self.intent_entities.items()))
-                intent_word = random.choice(intent_words)
-
-                # Date ranges
-                year1 = random.randint(2020, 2023)
-                year2 = year1 + random.randint(1, 2)
-
-                templates = [
-                    f"{year1} ile {year2} arası {table_word} {intent_word}",
-                    f"{year1}-{year2} {table_word} {intent_word}",
-                    f"{year1} den {year2} ye kadar {table_word} {intent_word}"
-                ]
-
-                text = random.choice(templates)
-                entities = self._extract_entities_from_text(text, {
-                    str(year1): "TIME_RANGE_START",
-                    str(year2): "TIME_RANGE_END",
-                    table_word: table_entity,
-                    intent_word: intent_entity
-                })
-
-            patterns.append({
-                "text": text,
-                "entities": entities
-            })
-
-        return patterns
-
-    def _generate_edge_cases(self, count):
-        """Generate edge cases and challenging patterns"""
-        patterns = []
-
-        edge_templates = [
-            # Typos and variations
-            "müşetri sayısı",  # Typo
-            "ürünlerin toplamı",  # Different form
-            "siparişlere ait veriler",  # Complex structure
-            "kategorilere göre grupla",  # Grouping
-            "en çok satan ürünler",  # Superlative
-            "hiç sipariş vermeyen müşteriler",  # Negation
+        total_weight = sum(w for _, w in pattern_weights)
+        pattern_weights = [(p, w/total_weight) for p,w in pattern_weights]
+
+        counts = {p: int(size * w) for p,w in pattern_weights}
+
+        for pattern, count in counts.items():
+            for _ in tqdm(range(count), desc=f"Generating {pattern}"):
+                method = getattr(self, f"_generate_{pattern}")
+                sample = method()
+                if sample and self._is_unique(sample):
+                    samples.append(sample)
+
+        random.shuffle(samples)
+        return samples[:size]
+
+    def _is_unique(self, sample):
+        h = hashlib.md5(json.dumps(sample, sort_keys=True).encode("utf-8")).hexdigest()
+        if h in self.generated_hashes:
+            return False
+        self.generated_hashes.add(h)
+        return True
+
+    # --- Pattern generators ---
+
+    def _generate_simple_select(self):
+        table, table_name = self._random_table()
+        table_alias = self._random_table_alias(table_name)
+
+        intent = random.choice(self.intents["SELECT"])
+        text = f"{intent} {table_alias} bilgilerini"
+
+        entities = [
+            self._entity(table_alias, f"TABLE_{table_name}", text)
         ]
+        return {"text": text, "entities": entities}
 
-        for template in edge_templates[:count]:
-            # Simple entity extraction for edge cases
-            entities = []
-            words = template.split()
+    def _generate_select_with_columns(self):
+        table, table_name = self._random_table()
+        table_alias = self._random_table_alias(table_name)
+        columns = self._random_columns(table_name, max_cols=2)
 
-            for i, word in enumerate(words):
-                # Basic pattern matching for edge cases
-                if "müş" in word:
-                    entities.append({
-                        "start": template.find(word),
-                        "end": template.find(word) + len(word),
-                        "label": "TABLE_CUSTOMERS",
-                        "text": word
-                    })
-                elif "ürün" in word:
-                    entities.append({
-                        "start": template.find(word),
-                        "end": template.find(word) + len(word),
-                        "label": "TABLE_PRODUCTS",
-                        "text": word
-                    })
-                elif "sipariş" in word:
-                    entities.append({
-                        "start": template.find(word),
-                        "end": template.find(word) + len(word),
-                        "label": "TABLE_ORDERS",
-                        "text": word
-                    })
-                elif word in ["sayı", "toplam", "veri"]:
-                    entities.append({
-                        "start": template.find(word),
-                        "end": template.find(word) + len(word),
-                        "label": "INTENT_COUNT",
-                        "text": word
-                    })
+        intent = random.choice(self.intents["SELECT"])
 
-            patterns.append({
-                "text": template,
-                "entities": entities
-            })
+        col_texts = [c["text"] for c in columns]
+        col_phrase = " ve ".join(col_texts)
+        text = f"{intent} {table_alias} için {col_phrase} bilgilerini"
 
-        return patterns
+        entities = [
+            self._entity(table_alias, f"TABLE_{table_name}", text)
+        ]
+        for col in columns:
+            entities.append(self._entity(col["text"], f"COLUMN_{col['name']}", text))
 
-    def _extract_entities_from_text(self, text, entity_map):
-        """Extract entities with BIO tagging from text"""
-        entities = []
+        return {"text": text, "entities": sorted(entities, key=lambda x: x["start"])}
 
-        for word, label in entity_map.items():
-            if word in text:
-                start_idx = text.find(word)
-                end_idx = start_idx + len(word)
+    def _generate_time_filtered(self):
+        table, table_name = self._random_table(with_date=True)
+        table_alias = self._random_table_alias(table_name)
+        time_filter_text = random.choice(sum(self.time_filters.values(), []))
+        intent = random.choice(self.intents["SELECT"] + self.intents["COUNT"])
 
-                entities.append({
-                    "start": start_idx,
-                    "end": end_idx,
-                    "label": label,
-                    "text": word
-                })
+        # Pozisyonları ve cümle yapısını karıştır
+        if random.random() < 0.5:
+            text = f"{time_filter_text} {table_alias} {intent}"
+        else:
+            text = f"{intent} {table_alias} {time_filter_text}"
 
-        # Sort by start position
-        entities.sort(key=lambda x: x["start"])
-        return entities
+        entities = [
+            self._entity(table_alias, f"TABLE_{table_name}", text),
+            self._entity(time_filter_text, "TIME_FILTER", text)
+        ]
+        entities.append(self._entity(intent, f"INTENT_{intent.upper()}", text))
 
-    def _remove_duplicates(self, data):
-        """Remove duplicate training samples"""
-        seen_texts = set()
-        unique_data = []
+        return {"text": text, "entities": sorted(entities, key=lambda x: x["start"])}
 
-        for item in data:
-            if item["text"] not in seen_texts:
-                seen_texts.add(item["text"])
-                unique_data.append(item)
+    def _generate_aggregation(self):
+        agg_type = random.choice(list(self.intents.keys() - {"SELECT"}))
+        table, table_name = self._random_table()
 
-        return unique_data
+        # Eğer sum/avg ise destekleniyor mu kontrolü
+        if agg_type in ["SUM", "AVG"]:
+            schema = self.schema_mapper.get_table_schema(table_name)
+            cols = schema.get(f"{agg_type.lower()}_columns", [])
+            if not cols:
+                return None
+            col_name = random.choice(cols)
+            col_text = self._random_column_alias(col_name)
+        else:
+            # max, min, count için rastgele sütun veya tablo
+            if agg_type == "COUNT":
+                col_name = None
+            else:
+                # max,min için rastgele display_column seç
+                schema = self.schema_mapper.get_table_schema(table_name)
+                display_cols = schema.get("display_columns", [])
+                if not display_cols:
+                    return None
+                col_name = random.choice(display_cols)
+                col_text = self._random_column_alias(col_name)
 
-    def get_statistics(self, data):
-        """Get dataset statistics"""
-        stats = {
-            "total_samples": len(data),
-            "entity_distribution": {},
-            "average_entities_per_sample": 0,
-            "unique_entity_types": set()
+        intent = random.choice(self.intents[agg_type])
+        table_alias = self._random_table_alias(table_name)
+
+        if agg_type == "COUNT":
+            text = f"{table_alias} için {intent} sayısı"
+            entities = [
+                self._entity(table_alias, f"TABLE_{table_name}", text),
+                self._entity(intent, f"INTENT_{agg_type}", text)
+            ]
+        else:
+            text = f"{table_alias} tablosundaki {col_text} sütununun {intent} değeri"
+            entities = [
+                self._entity(table_alias, f"TABLE_{table_name}", text),
+                self._entity(col_text, f"COLUMN_{col_name}", text),
+                self._entity(intent, f"INTENT_{agg_type}", text)
+            ]
+
+        return {"text": text, "entities": sorted(entities, key=lambda x: x["start"])}
+
+    def _generate_join_query(self):
+        # Basitçe, iki tablo seç, "ile" bağlacı kullan
+        tables = self.schema_mapper.get_all_tables()
+        t1, t2 = random.sample(tables, 2)
+        t1_alias = self._random_table_alias(t1)
+        t2_alias = self._random_table_alias(t2)
+
+        join_words = ["ile", "ve", "birlikte"]
+        join_word = random.choice(join_words)
+
+        intent = random.choice(self.intents["SELECT"])
+
+        text = f"{t1_alias} {join_word} {t2_alias} bilgilerini {intent}"
+
+        entities = [
+            self._entity(t1_alias, f"TABLE_{t1}", text),
+            self._entity(t2_alias, f"TABLE_{t2}", text),
+            self._entity(intent, f"INTENT_{intent.upper()}", text)
+        ]
+        return {"text": text, "entities": sorted(entities, key=lambda x: x["start"])}
+
+    def _generate_conditional(self):
+        table, table_name = self._random_table()
+        table_alias = self._random_table_alias(table_name)
+        schema = self.schema_mapper.get_table_schema(table_name)
+        col_name = None
+
+        # Random uygun column seç
+        for col in schema.get("display_columns", []):
+            # Eğer numeric veya date gibi koşul için uygun (örnek basitçe string hariç)
+            if "date" in col or "price" in col or "amount" in col or "quantity" in col or "stock" in col or "id" in col:
+                col_name = col
+                break
+        if not col_name:
+            col_name = random.choice(schema.get("display_columns", []))
+
+        col_text = self._random_column_alias(col_name)
+        cond_type = random.choice(list(self.conditions.keys()))
+        cond_word = random.choice(self.conditions[cond_type])
+
+        # Değer üret (sütun tipine göre basit)
+        val = self._generate_value_for_column(col_name)
+
+        intent = random.choice(self.intents["SELECT"])
+
+        text = f"{table_alias} tablosunda {col_text} {cond_word} {val} olanlar {intent}"
+
+        entities = [
+            self._entity(table_alias, f"TABLE_{table_name}", text),
+            self._entity(col_text, f"COLUMN_{col_name}", text),
+            self._entity(cond_word, "CONDITION", text),
+            self._entity(str(val), "VALUE", text),
+            self._entity(intent, f"INTENT_{intent.upper()}", text)
+        ]
+        return {"text": text, "entities": sorted(entities, key=lambda x: x["start"])}
+
+    def _generate_count_query(self):
+        table, table_name = self._random_table()
+        table_alias = self._random_table_alias(table_name)
+        intent = random.choice(self.intents["COUNT"])
+
+        text = f"{table_alias} sayısı {intent}"
+
+        entities = [
+            self._entity(table_alias, f"TABLE_{table_name}", text),
+            self._entity(intent, f"INTENT_COUNT", text)
+        ]
+        return {"text": text, "entities": entities}
+
+    # --- Yardımcı metodlar ---
+
+    def _random_table(self, with_date=False):
+        tables = self.schema_mapper.get_all_tables()
+        if with_date:
+            tables = [t for t in tables if self.schema_mapper.get_table_schema(t).get("date_column")]
+            if not tables:
+                tables = self.schema_mapper.get_all_tables()
+        table = random.choice(tables)
+        return table, table
+
+    def _random_table_alias(self, table_name):
+        return random.choice(self.table_aliases.get(table_name, [table_name]))
+
+    def _random_column_alias(self, column_name):
+        # Basitçe kolon adı veya alias
+        if column_name == "salary":
+            return random.choice(["maaş", "ücret", "gelir"])
+        return column_name.replace("_", " ")
+
+    def _random_columns(self, table_name, max_cols=2):
+        schema = self.schema_mapper.get_table_schema(table_name)
+        cols = schema.get("display_columns", [])
+        num = random.randint(1, min(max_cols, len(cols)))
+        selected = random.sample(cols, num)
+        return [{"name": c, "text": self._random_column_alias(c)} for c in selected]
+
+    def _generate_value_for_column(self, col_name):
+        if "price" in col_name or "amount" in col_name:
+            return round(random.uniform(10, 1000), 2)
+        if "date" in col_name:
+            # Tarih biçimi
+            d = datetime.now() - timedelta(days=random.randint(0, 365))
+            return d.strftime("%Y-%m-%d")
+        if "quantity" in col_name or "stock" in col_name or "id" in col_name:
+            return random.randint(1, 1000)
+        # Default string değer
+        return random.choice(["aktif", "pasif", "beklemede"])
+
+    def _entity(self, text, label, full_text):
+        """Entity dict with correct start/end in full_text"""
+        start = full_text.find(text)
+        if start == -1:
+            # Eğer bulunamazsa 0 konabilir ya da None
+            start = 0
+        end = start + len(text)
+        return {"text": text, "label": label, "start": start, "end": end}
+
+    def save_dataset(self, filename="ner_training_data.json", size=10000):
+        data = self.generate_dataset(size)
+        metadata = {
+            "generated_at": datetime.now().isoformat(),
+            "schema_tables": self.schema_mapper.get_all_tables(),
+            "sample_size": size
         }
-
-        total_entities = 0
-
-        for sample in data:
-            entities = sample.get("entities", [])
-            total_entities += len(entities)
-
-            for entity in entities:
-                label = entity["label"]
-                stats["entity_distribution"][label] = stats["entity_distribution"].get(label, 0) + 1
-                stats["unique_entity_types"].add(label)
-
-        stats["average_entities_per_sample"] = round(total_entities / len(data), 2) if data else 0
-        stats["unique_entity_types"] = list(stats["unique_entity_types"])
-
-        return stats
-
-    def save_ner_data(self, output_file="../data/ner_training_data.json"):
-        """Generate and save NER training data"""
-        print("🤖 Generating comprehensive Turkish NER training data...")
-
-        # Generate data
-        training_data = self.generate_comprehensive_ner_data(2000)
-
-        # Get statistics
-        stats = self.get_statistics(training_data)
-
-        # Prepare output
-        output = {
-            "meta": {
-                "total_samples": stats["total_samples"],
-                "entity_distribution": stats["entity_distribution"],
-                "average_entities_per_sample": stats["average_entities_per_sample"],
-                "unique_entity_types": stats["unique_entity_types"],
-                "generation_method": "comprehensive_pattern_based_with_advanced_time_support",
-                "supported_features": [
-                    "basic_time_entities",
-                    "relative_time_periods",
-                    "quarter_patterns",
-                    "specific_dates",
-                    "complex_multi_entity",
-                    "edge_cases"
-                ]
-            },
-            "training_data": training_data
+        result = {
+            "metadata": metadata,
+            "samples": data
         }
-
-        # Save to file
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(output, f, ensure_ascii=False, indent=2)
-
-        print(f"\n📊 NER Training Data Statistics:")
-        print(f"  Total samples: {stats['total_samples']}")
-        print(f"  Unique entity types: {len(stats['unique_entity_types'])}")
-        print(f"  Average entities per sample: {stats['average_entities_per_sample']}")
-
-        print(f"\n🔍 Entity Distribution:")
-        for entity_type, count in sorted(stats['entity_distribution'].items()):
-            print(f"  {entity_type}: {count}")
-
-        print(f"\n✅ NER training data saved to: {output_file}")
-
-        # Show sample examples
-        print(f"\n🔍 Sample Examples:")
-        for i, sample in enumerate(random.sample(training_data, min(5, len(training_data)))):
-            print(f"\n  Example {i + 1}:")
-            print(f"    Text: '{sample['text']}'")
-            print(f"    Entities: {len(sample['entities'])}")
-            for entity in sample['entities']:
-                print(f"      - '{entity['text']}' → {entity['label']}")
-
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+        print(f"✅ Dataset saved: {filename} ({len(data)} samples)")
 
 if __name__ == "__main__":
-    generator = NERDataGenerator()
-    generator.save_ner_data()
+    sm = SchemaMapper()
+    generator = NERDataGenerator(sm)
+    generator.save_dataset(size=50000)

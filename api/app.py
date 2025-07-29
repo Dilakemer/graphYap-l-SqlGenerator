@@ -2,13 +2,16 @@ import subprocess
 import threading
 import webbrowser
 import time
- 
+"""
+Bu dosya bir başlatıcı Python script’i. Hem .NET projesini çalıştırıyor hem de FastAPI sunucusunu ayağa kaldırıyor.
+C# (ASP.NET) frontend + Python (FastAPI) backend birlikte çalışsın ve tarayıcıda otomatik olarak açılsın
+"""
 # 1. .NET Core Projesini Başlat (VS2022 Açık Olmasına Gerek YOK!)
 def run_dotnet():
     # C# projenin .csproj dosyasının bulunduğu klasör yolu
     subprocess.Popen(
         ["dotnet", "run"],
-        cwd=r"C:\newfile\stajdeneme",  # KENDİ PROJE YOLUNU KONTROL ET!
+        cwd=r"C:\newfile\stajdeneme",
         shell=True
     )
  
@@ -57,8 +60,8 @@ def generate_sql(req: QueryRequest):
     """
     try:
         start_time = time.time()
-        nlp_result = nlp_processor.analyze(req.text)
-        sql_result = sql_generator.generate_sql(nlp_result)
+        nlp_result = nlp_processor.analyze(req.text)#intent ve entity çıkarımı
+        sql_result = sql_generator.generate_sql(nlp_result)#sql üretimi
         elapsed = round(time.time() - start_time, 3)
  
         if sql_result.get("success"):

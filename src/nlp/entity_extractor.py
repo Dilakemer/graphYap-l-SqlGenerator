@@ -1,9 +1,10 @@
 # src/nlp/entity_extractor.py
 """
-NER-based Entity Extractor for Turkish NLP-SQL Project
-Uses trained Turkish NER model for high-accuracy entity detection
+✅ EntityExtractor.extract() fonksiyonu bu modelin tahmin motorudur.
+✅ Tüm bu yapı üzerine SQL üretimi oturuyor.
 """
-
+from datetime import datetime
+import re
 import sys
 from pathlib import Path
 
@@ -67,14 +68,68 @@ class EntityExtractor:
             raise RuntimeError("NER model not loaded. Cannot perform extraction.")
         
         self.extracted_queries += 1
-        
+        parsed_entities = {}
+        # 👇 Manuel tarih yakalama (örneğin 2025-08-12 gibi)
+        date_matches = re.findall(r"\b\d{2}\.\d{2}\.\d{4}\b", text)
+
+        manual_time_filters = []
+        # Tarih formatları (yyyy-mm-dd veya dd.mm.yyyy)
+        date_matches_iter = re.finditer(r"\b\d{4}-\d{2}-\d{2}\b|\b\d{2}\.\d{2}\.\d{4}\b", text)
+        for match in date_matches_iter:
+            matched_text = match.group()
+            start_pos = match.start()
+            end_pos = match.end()
+            try:
+                if "-" in matched_text:
+                    parsed_date = datetime.strptime(matched_text, "%Y-%m-%d")
+                else:
+                    parsed_date = datetime.strptime(matched_text, "%d.%m.%Y")
+                iso_date = parsed_date.strftime("%Y-%m-%d")
+
+                manual_time_filters.append({
+                    "period": "specific_date",
+                    "confidence": 1.0,
+                    "matched_pattern": matched_text,
+                    "start": start_pos,
+                    "end": end_pos,
+                    "original_label": "TIME_SPECIFIC",
+                    "date": iso_date
+                })
+            except ValueError:
+                continue
+
+        # Yıl yakalama (örneğin 2022, 2023)
+        year_matches_iter = re.finditer(r"\b(20\d{2})\b", text)
+        for match in year_matches_iter:
+            matched_text = match.group()
+            start_pos = match.start()
+            end_pos = match.end()
+            try:
+                year = int(matched_text)
+                start_date = f"{year}-01-01"
+                end_date = f"{year}-12-31"
+
+                manual_time_filters.append({
+                    "period": "year",
+                    "confidence": 1.0,
+                    "matched_pattern": matched_text,
+                    "start": start_pos,
+                    "end": end_pos,
+                    "original_label": "TIME_YEAR",
+                    "start_date": start_date,
+                    "end_date": end_date
+                })
+            except ValueError:
+                continue
+
+                
         try:
             # Get all entities from NER model
             all_entities = self.ner_model.predict(text, return_confidence=True)
             
             # Separate entities by type
             tables = []
-            time_filters = []
+            time_filters = manual_time_filters.copy()
             intents = []
             numbers = []
             other_entities = []
@@ -88,6 +143,11 @@ class EntityExtractor:
                     time_filters.append(self._format_time_entity(entity))
                 elif label.startswith("INTENT_"):
                     intents.append(self._format_intent_entity(entity))
+                    # Ek olarak aggregation_modifier olarak işaretle
+                    if label == "INTENT_MAX":
+                        parsed_entities["aggregation_modifier"] = "MAX"
+                    elif label == "INTENT_MIN":
+                        parsed_entities["aggregation_modifier"] = "MIN"
                 elif label in ["TIME_NUMBER", "TIME_UNIT"]:
                     numbers.append(self._format_number_entity(entity))
                 else:
@@ -113,7 +173,8 @@ class EntityExtractor:
                 "numbers": numbers,
                 "other_entities": other_entities,
                 "all_entities": all_entities,
-                "metadata": metadata
+                "metadata": metadata,
+                "entities": parsed_entities
             }
             
             self.successful_extractions += 1

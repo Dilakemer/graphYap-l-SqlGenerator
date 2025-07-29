@@ -44,6 +44,7 @@ class NERTrainer:
         self.optimizer = None
         self.scheduler = None
 
+
         # Training configuration
         self.config = {
             "learning_rate": 2e-5,
@@ -53,7 +54,8 @@ class NERTrainer:
             "weight_decay": 0.01,
             "max_grad_norm": 1.0,
             "early_stopping_patience": 3,
-            "save_best_model": True
+            "save_best_model": True,
+            "fp16": True
         }
 
         # Training state
@@ -173,51 +175,38 @@ class NERTrainer:
             return False
 
     def train_epoch(self):
-        """Train for one epoch"""
         self.model.model.train()
         total_loss = 0
         predictions = []
         true_labels = []
 
         for batch_idx, batch in enumerate(self.train_loader):
-            # Move batch to device
+            self.optimizer.zero_grad()
+
             input_ids = batch["input_ids"].to(self.device)
             attention_mask = batch["attention_mask"].to(self.device)
             labels = batch["labels"].to(self.device)
 
-            # Zero gradients
-            self.optimizer.zero_grad()
-
-            # Forward pass
+            # FP16 kaldırıldı — doğrudan forward
             outputs = self.model.model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 labels=labels
             )
-
             loss = outputs.loss
             logits = outputs.logits
 
-            # Backward pass
-            loss.backward()
-
-            # Gradient clipping
+            loss.backward()  # Doğrudan backward
             torch.nn.utils.clip_grad_norm_(
                 self.model.model.parameters(),
                 self.config["max_grad_norm"]
             )
-
-            # Update weights
             self.optimizer.step()
             self.scheduler.step()
 
-            # Track metrics
             total_loss += loss.item()
-
-            # Get predictions for metrics
             batch_predictions = torch.argmax(logits, dim=-1)
 
-            # Flatten and filter out padding (-100 labels)
             for i in range(labels.size(0)):
                 label_mask = labels[i] != -100
                 true_batch_labels = labels[i][label_mask].cpu().numpy()
@@ -226,11 +215,9 @@ class NERTrainer:
                 true_labels.extend(true_batch_labels)
                 predictions.extend(pred_batch_labels)
 
-            # Print progress
             if batch_idx % 50 == 0:
                 print(f"    Batch {batch_idx}/{len(self.train_loader)}, Loss: {loss.item():.4f}")
 
-        # Calculate epoch metrics
         avg_loss = total_loss / len(self.train_loader)
         f1_score = self._calculate_f1_score(true_labels, predictions)
 
@@ -251,11 +238,11 @@ class NERTrainer:
                 labels = batch["labels"].to(self.device)
 
                 # Forward pass
-                outputs = self.model.model(
+                with torch.cuda.amp.autocast():  # <--- FP16 inference
+                    outputs = self.model.model(
                     input_ids=input_ids,
                     attention_mask=attention_mask,
-                    labels=labels
-                )
+                    labels=labels)
 
                 loss = outputs.loss
                 logits = outputs.logits
