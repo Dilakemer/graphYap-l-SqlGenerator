@@ -47,7 +47,7 @@ bileşenlerini birlikte çalıştırır.
 ### 📚 Eğitim Verisi
 
 - **Format**: JSON (etiketli cümleler)  
-- **Örnek Sayısı**: 1500+ cümle  
+- **Örnek Sayısı**: yaklaşık 15.000 cümle  
 - **Etiket Sayısı**: 71 farklı etiket (TABLE_*, COLUMN_*, DATE, INTENT_*, AGGREGATION_MODIFIER, VALUE, vb.)  
 
 #### Örnek Kayıt
@@ -68,7 +68,7 @@ bileşenlerini birlikte çalıştırır.
 
 Eğitim script’i `src/nlp/ner_model/train_ner.py` içinde:
 
-\`\`\`bash
+\`\`\`
 python src/nlp/ner_model/train_ner.py \
   --model_name dbmdz/bert-base-turkish-cased \
   --train_data ./data/train.json \
