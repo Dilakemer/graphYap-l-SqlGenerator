@@ -1,4 +1,4 @@
-cat << 'EOF' > README.md
+
 # 📊 graphYapı SQL Generator
 
 
@@ -32,7 +32,10 @@ Yukarıdaki diyagramda:
 bileşenlerini birlikte çalıştırır.
 
 ---
-
+![ARAYÜZ](images/arayuz.png)
+![SORGULAMA](images/sorgu_ekranı.png)
+![ÜRÜN FİLTRELEME EKRANI](images/ürün_filtreleme.png)
+![MÜŞTERİLER](images/müşteriler.png)
 ## 🧠 Yapay Zeka ve NER Model Eğitimi
 
 ### 📌 Kullanılan Model
