@@ -170,45 +170,6 @@ LIMIT 5;
   - Kolon-varlık tutarlılığını
   kontrol eder. Hata durumunda açıklayıcı exception fırlatır.
 
----
-
-## 📂 Proje Yapısı
-
-\`\`\`
-graphYapı-SqlGenerator/
-├── assets/                        
-│   ├── logo.png                   
-│   └── flowchart.png              
-├── docs/
-│   └── images/                    
-│       └── architecture.png       
-├── src/
-│   ├── nlp/ner_model/             
-│   │   ├── train_ner.py           
-│   │   ├── inference.py          
-│   │   └── utils.py               
-│   ├── query_builder/             
-│   │   ├── sql_generator.py       
-│   │   ├── schema_mapper.py       
-│   │   ├── relation_mapper.py     
-│   │   ├── query_templates.py     
-│   │   └── query_validator.py     
-│   └── utils/                     
-│       └── helpers.py             
-├── data/                          
-│   ├── train.json                 
-│   ├── val.json                   
-│   ├── test.json                  
-│   ├── schema.json                
-│   └── relations.json             
-├── models/ner_model/              
-│   ├── config.json                
-│   ├── pytorch_model.bin          
-│   └── tokenizer.json             
-├── main.py                        
-├── requirements.txt               
-└── README.md                      
-\`\`\`
 
 ---
 
@@ -218,3 +179,6 @@ git clone https://github.com/Dilakemer/graphYap-l-SqlGenerator.git
 cd graphYap-l-SqlGenerator
 pip install -r requirements.txt
 python main.py
+
+##NOT:
+Model dosyasının boyutu çok büyük olduğu için eğitilmiş model dosyalarını models/ner_model/ altına eklemeyi unutmayın.
